@@ -1,7 +1,6 @@
 MASTER CODE
-	'servers' list of all servers on or offline
-	'onlineServers' list of all servers up and running in the chain
-
+	'banks'	map of banks to online servers
+		'onlineServers' list of all servers up and running in the chain
 	init :
 		//creates a list of all servers in order they appear in the chain
 		//also propogates the onlineServers list
@@ -11,34 +10,29 @@ MASTER CODE
 
 	setTail(newTail) :
 		tail = newTail
-		onlineServers.add(tail)
+		 banks[tail].onlineServers.add(tail)
 
-	getHead() :
-		reply head
+	getHead(bank) :
+		reply banks[bank].head
 
 	//is called when a server fails (terminated)
-	detectFailure(failedNode) :
-		//if failedNode is the head
-		if(failedNode == onlineServers.firstObject())
-			head = onlineServers[1]
-			onlineServers.remove(failedNode)
-		//else if failedNode is tail
-		else if (failedNode == servers.lastObject()) 
-			//tail
-			tail = onlineServers.secondToLastObject()
-			onlineServers.remove(failedNode)
-
+	detectFailure(failedNode, bank) :
+		if(failedNode isHead)
+			head = getNextHeadForBank(bank)
+		else if (failedNode isTail) 
+			tail = getNewTailForBank(bank)
 
 		//assume arrays out of bounds return null
 		i = 0
-		for server in onlineServers
-			//triggers 'onFailureMessageFromMaster' in SERVER code
-			server.sendFailureMessage(onlineServer[i+1], onlineServer[i-1], failedNode)
-			i++
+		for bank in banks
+			for server in bank.onlineServers
+				//triggers 'onFailureMessageFromMaster' in SERVER code
+				server.sendFailureMessage(onlineServer[i+1], onlineServer[i-1], failedNode)
+				i++
 
 	//is called when a server is rebooted
 	newTaillWantsToJoin(joiningServer) : 
-		tail.setNewTail(joiningServer)
+		banks[joiningServer].tail.setNewTail(joiningServer)
 
 CLIENT CODE
 
@@ -54,23 +48,25 @@ CLIENT CODE
 		tail = master.getBank(bankName).getTail()
 		reqId = genReqId(bankName, accountNum)
 		
-		request = head.withdraw(reqId, accountNum, amount)
-		log(request)
+		response = head.withdraw(reqId, accountNum, amount)
+		log(response)
 
 
 	depsoit(bankName, accountNum, amount) : 
 		tail = master.getBank(bankName).getTail()
 		reqId = genReqId(bankName, accountNum)
 
-		request = head.depsoit(reqId, accountNum, amount)
-		log(request)
+		response = head.depsoit(reqId, accountNum, amount)
+		log(response)
 
 
-	transfer(reqId, accountNum, amount, destBank, destAct) :
-		head = master.getHead()
+	transfer(accountNum, amount, destBank, destAct) :
+		head = master.getHead(destBank)
+		reqId = genReqId(bankName, accountNum)
 
-		request = head.transfer(reqId, accountNum, amount, destBank, destAct)
-		log(request)
+
+		response = head.transfer(reqId, accountNum, amount, destBank, destAct)
+		log(response)
 
 	#pragma mark - Client Helper Functions
 
@@ -92,11 +88,16 @@ SERVER CODE
 		reply accounts[accountNum]
 
 	//called when succ calls 'send(pred, reqId)'
-	onResponseFromSucc(reqId) :
+	onResponseFromSucc(requestData) :
 		//clean up pendingList and send to pred
-		pendingList.remove(reqId)
+		reqId = requestData.reqId
+		pendingList[reqId] = null;
 		if not head
-			send(pred, reqId)
+			send(pred, requestData)
+		else if (pendingList[reqId].type == transfer)
+			item = pendingList[reqId]
+			if(item.sourceBank != self)
+				send(item.sourceBank, reqId)
 
 	//called when the new pred detects a failure in it's old succ
 	onMessageFromPred(newPendingList) :
@@ -104,10 +105,12 @@ SERVER CODE
 		for item in newPendingList
 			if item not in pendingList 
 				pendingList.add(item)
-				if(item[3] == withdraw)
-					withdraw(item[0], item[1], item[2])
-				else if(item[3] == deposit)
-					deposit(item[0], item[1], item[2])
+				if(item.type == withdraw)
+					withdraw(item.reqId, item.accountNum, item.amount)
+				else if(item.type == deposit)
+					deposit(item.reqId, item.accountNum, item.amount)
+				else if(item.type == transfer)
+					transfer(item.reqId, item.accountNum, item.amount, item.destBank, item.destAct)
 
 	onFailureMessageFromMaster(newSucc, newPred, failedNode) :
 		oldSucc = succ
@@ -123,6 +126,12 @@ SERVER CODE
 
 
 	withdraw(reqId, accountNum, amount) : 
+		requestData = {
+				reqId 		: reqId,
+				amount 	: amount, 
+				accountNum : accountNum,
+				type 		: withdraw 
+		}
 		if(accounts[accountNum] == null) //doesn't exist
 			accounts[accountNum] = 0
 
@@ -130,45 +139,54 @@ SERVER CODE
 		if(proccessedTrans[reqId] == null) //doesn't exist
 			if(accounts[accountNum] >= amount)
 				accounts[accountNum] -= amount
-				proccessedTrans[reqId] = <reqId, Proccessed, accounts[accountNum], withdraw>
+				proccessedTrans[reqId] = requestData
 				outcome = Processed
 			else
 				outcome = InsufficientFunds
 		else
-			if(proccessedTrans[reqId][3] == withdraw) 
+			if(proccessedTrans[reqId] == requestData) 
 				outcome = Proccessed
 			else
 				outcome = IncosistentHistory
 
 		if tail
 			reply <reqId, outcome, accounts[accountNum]>
-			send(pred, reqId)
+			send(pred, requestData)
 		else 
-			pass(suc, withdraw, reqId, accountNum, amount)
-			pendingList.add(<reqId, outcome, accounts[accountNum], withdraw>)
+			send(suc, requestData)
+			pendingList.add(requestData)
 
 
 	depsoit(reqId, accountNum, amount) : 
+		requestData = {
+				reqId 		: reqId,
+				amount 		: amount, 
+				accountNum 	: accountNum,
+				type 		: deposit 
+		}
+
 		if(accounts[accountNum] == null) //doesn't exist
 			accounts[accountNum] = 0
 
 		outcome = null
 		if(proccessedTrans[reqId] == null) //doesn't exist
-				accounts[accountNum] += amount
-				proccessedTrans[reqId] = <reqId, Proccessed, accounts[accountNum], deposit>
-				outcome = Processed
+			accounts[accountNum] += amount
+			proccessedTrans[reqId] = requestData
+			outcome = Processed
 		else
-			if(proccessedTrans[reqId][3] == deposit) 
+			if(proccessedTrans[reqId] = requestData) 
 				outcome = Proccessed
 			else
 				outcome = IncosistentHistory
 
 		if tail
 			reply <reqId, outcome, accounts[accountNum]>
-			send(pred, reqId)
+			send(pred, requestData) //send backwards so nodes remove 
 		else 
-			pass(suc, deposit, reqId, accountNum, amount)
-			pendingList.add(<reqId, outcome, accounts[accountNum], deposit>)
+			pendingList.add(requestData)
+			send(suc, requestData)
+
+
 
 	#pragma mark - Adding Tail
 
@@ -188,9 +206,97 @@ SERVER CODE
 		master.setTail(self) //triggers 'setTail' in MASTER code
 
 
-	//TODO
-	transfer(reqId, accountNum, amount, destBank, destAct) :
-		head = master.getHead()
+	#pragma mark - Transfer
 
-		request = head.transfer(reqId, accountNum, amount, destBank, destAct)
-		log(request)
+	transfer(reqId, accountNum, amount, destBank, destAct) :
+		requestData = {
+			reqId 		: reqId,
+			amount 		: amount, 
+			accountNum 	: accountNum,
+			type 		: deposit, 
+			destBank	: destBank,
+			destAct		: destAct,
+		}
+		//we are destination AND source bank
+		if(destBank == self) 
+			//doesn't exist
+			if(accounts[accountNum] == null)
+				accounts[accountNum] = 0
+			if(accounts[destAct] == null)
+				accounts[destAct] = 0
+
+			outcome = null
+			if(proccessedTrans[reqId] == null) //doesn't exist
+				if(accounts[accountNum] >= amount)
+					accounts[accountNum] -= amount
+					accounts[destAct] += amount
+					proccessedTrans[reqId] = requestData 
+					outcome = Processed
+				else
+					outcome = InsufficientFunds
+			else
+				if(proccessedTrans[reqId] == requestData) 
+					outcome = Proccessed
+				else
+					outcome = IncosistentHistory
+
+			if tail
+				reply <reqId, outcome, accounts[destAct]>
+				send(pred, requestData)
+			else 
+				send(suc, requestData)
+				pendingList.add(requestData)
+		
+		else // not the same bank
+
+			//we are the destBank - deposit money
+			if(destBank == null)
+				//doesn't exist
+				if(accounts[destAct] == null)
+					accounts[destAct] = 0
+
+				outcome = null
+				if(proccessedTrans[reqId] == null) //doesn't exist
+					accounts[destAct] += amount
+					proccessedTrans[reqId] = requestData
+					outcome = Processed
+				else
+					if(proccessedTrans[reqId] == requestData) 
+						outcome = Proccessed
+					else
+						outcome = IncosistentHistory
+
+				if tail
+					reply <reqId, outcome, accounts[destAct]>
+					send(pred, requestData)
+				else 
+					send(suc, requestData)
+					pendingList.add(requestData)
+
+			else //we are the sourceBank - withdraw money
+
+				//doesn't exist
+				if(accounts[accountNum] == null)
+					accounts[accountNum] = 0
+
+				outcome = null
+				if(proccessedTrans[reqId] == null) //doesn't exist
+					if(accounts[accountNum] >= amount)
+						accounts[accountNum] -= amount
+						proccessedTrans[reqId] = requestData
+						outcome = Processed
+					else
+						outcome = InsufficientFunds
+				else
+					if(proccessedTrans[reqId] == requestData) 
+						outcome = Proccessed
+					else
+						outcome = IncosistentHistory
+
+				if tail
+					requestData.destBank = null
+					send(master.getHead(destBank), requestData)
+				else
+					send(suc, requestData)
+				
+				pendingList.add(requestData)
