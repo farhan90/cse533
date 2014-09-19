@@ -31,7 +31,7 @@ MASTER CODE
 		'onlineServers' list of all servers up and running in the chain
 	init :
 		//creates a list of all servers in order they appear in the chain
-		//also propogates the onlineServers list
+		//also propogates the onlineServers list and bank map
 
 	getTail() :
 		reply tail
