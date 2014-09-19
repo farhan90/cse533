@@ -1,3 +1,31 @@
+James Bouker 	SBID: 107091895
+Farhan Ali 		SBID: 107450803
+
+-- Description of Transfer --
+	Transfers are handled in 2 cases:
+		1. destBank and sourceBanks are the same
+			In this case we simply check if the sourceAct has enough funds. If it does 
+			take out the money and deposit into the destAct
+		2. destBank and sourceBanks are different (2 Cases):
+			1. destBank is not null:
+				This mean we are a node in the source bank. We propogate the request to the tail 
+				withdrawing money and recording the request as we go along the chain
+
+				When the request gets to the tail -> send a request to the head of the destBank.
+				*Note: When forming request set destAct to null
+
+			2. destBank is null:
+				This means we are a node in the destBank. We propogates the request to the tail
+				depositing money and recording the request as we go along the chain
+
+				When the request gets to the tail -> send a response to the tails pred, starting a chain of backwards
+				requests removing the request from pending as we go.
+
+				When the backwards request hits the head, we forward this to the tail of the source bank.
+				They then continue the backward request until the source head as recieved it.
+
+-- PSEUDO CODE -- 
+
 MASTER CODE
 	'banks'	map of banks to online servers
 		'onlineServers' list of all servers up and running in the chain
@@ -274,6 +302,7 @@ SERVER CODE
 					pendingList.add(requestData)
 
 			else //we are the sourceBank - withdraw money
+				requestData.sourceBank = self
 
 				//doesn't exist
 				if(accounts[accountNum] == null)
