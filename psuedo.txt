@@ -42,22 +42,25 @@ MASTER CODE
 
 CLIENT CODE
 
-	getBalance(reqId, accountNum) :
-		tail = master.getTail()
+	getBalance(bankName, accountNum) :
+		tail = master.getBank(bankName).getTail()
+		reqId = genReqId(bankName, accountNum)
 
 		//this is a request to tail
 		actBalance = tail.getBalance(reqId, accountNum)
 		return <reqId, Processed, actBalance>
 
-	withdraw(reqId, accountNum, amount) : 
-		head = master.getHead()
+	withdraw(bankName, accountNum, amount) : 
+		tail = master.getBank(bankName).getTail()
+		reqId = genReqId(bankName, accountNum)
 		
 		request = head.withdraw(reqId, accountNum, amount)
 		log(request)
 
 
-	depsoit(reqId, accountNum, amount) : 
-		head = master.getHead()
+	depsoit(bankName, accountNum, amount) : 
+		tail = master.getBank(bankName).getTail()
+		reqId = genReqId(bankName, accountNum)
 
 		request = head.depsoit(reqId, accountNum, amount)
 		log(request)
@@ -68,6 +71,12 @@ CLIENT CODE
 
 		request = head.transfer(reqId, accountNum, amount, destBank, destAct)
 		log(request)
+
+	#pragma mark - Client Helper Functions
+
+	genReqId(bankName, accountNum) :
+		requestCount++
+		return 'bankName' + '.' + 'accountNum' + '.' + 'requestCount'
 
 
 SERVER CODE
