@@ -100,7 +100,7 @@ CLIENT CODE
 
 	genReqId(bankName, accountNum) :
 		requestCount++
-		return 'bankName' + '.' + 'accountNum' + '.' + 'requestCount'
+		return 'bankName' + '.' + 'accountNum' + '.' + requestCount
 
 
 SERVER CODE
@@ -124,7 +124,7 @@ SERVER CODE
 			send(pred, requestData)
 		else if (pendingList[reqId].type == transfer)
 			item = pendingList[reqId]
-			if(item.sourceBank != self)
+			if(item.sourceBank not null && item.sourceBank != self)
 				send(item.sourceBank, reqId)
 
 	//called when the new pred detects a failure in it's old succ
@@ -156,8 +156,8 @@ SERVER CODE
 	withdraw(reqId, accountNum, amount) : 
 		requestData = {
 				reqId 		: reqId,
-				amount 	: amount, 
-				accountNum : accountNum,
+				amount 		: amount, 
+				accountNum 	: accountNum,
 				type 		: withdraw 
 		}
 		if(accounts[accountNum] == null) //doesn't exist
