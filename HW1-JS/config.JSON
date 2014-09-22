@@ -1,0 +1,22 @@
+{
+	"banks" : [
+		{
+			"name" 	: "TFCU",
+			"port" 	: 5600,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 5
+		},
+		{
+			"name" 	: "CHASE",
+			"port" 	: 5700,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 5
+		},
+		{
+			"name" 	: "Bank of America",
+			"port" 	: 5800,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 5
+		}
+	]
+}
