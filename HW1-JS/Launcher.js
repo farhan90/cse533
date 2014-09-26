@@ -1,25 +1,29 @@
-var Bank = require('./Bank');
-var Client = require('./Client');
-
+var bankServer = require('./BankServer');
+var client = require('./Client');
+var master = require('./Master');
 var config = require('./config.json');
 
+
+//pragma mark - setup banks
+var banks = {};
 for(var i in config.banks) {
 	var bank = config.banks[i];
-	console.log("Bank Name: " + bank.name);
-	console.log("Bank IP: " + bank.ip);
-	console.log("Bank Port: " + bank.port);
-	console.log("Bank Chain Length: " + bank.chainLength);
+	banks[bank.name] = [];
+	for(var i=0; i<bank.chainLength; i++) {
+		var bnk = bankServer.createBankServer(bank.ip, bank.port+i, bank.name);
+		banks[bank.name].push(bnk);
+	}
 
-	Bank.createBank(bank.ip, bank.port, bank.name, bank.chainLength);
-	console.log("\n");
+	var clients = config.clients;
 }
 
-setTimeout(function() {
-	console.log("Calling Bank");
-	Client.sendRequest('127.0.0.1', 5600, {
-		reqId 	: 1,
-		type 	: "deposit",
-		amount 	: 100,
-		act 	: 1
-	});
-}, 1000*5);
+//pragma mark - setup master
+var master = master.createMaster(banks);
+
+//pragma mark - setup clients
+for(var i in config.clients) {
+	var clientData = config.clients[i];
+	var c = client.createClient(clientData.transactions, master);
+}
+
+
