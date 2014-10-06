@@ -185,7 +185,7 @@ SERVER CODE
 			pendingList.add(requestData)
 
 
-	depsoit(reqId, accountNum, amount) : 
+	deposit(reqId, accountNum, amount) : 
 		requestData = {
 				reqId 		: reqId,
 				amount 		: amount, 

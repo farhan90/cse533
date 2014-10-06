@@ -1,10 +1,14 @@
 {
+	"master" : {
+		"ip" : "127.0.0.1",
+		"port" : 8023
+	},
 	"banks" : [
 		{
 			"name" 	: "TFCU",
 			"port" 	: 5600,
 			"ip"	: "127.0.0.1",
-			"chainLength"	: 5
+			"chainLength"	: 7
 		},
 		{
 			"name" 	: "CHASE",
@@ -21,6 +25,8 @@
 	],
 	"clients" : [
 		{
+			"port" : 6000,
+			"ip"			: "127.0.0.1",
 			"transactions" 	: [
 				{
 					"type" 		: "deposit",
@@ -30,57 +36,26 @@
 				},
 				{
 					"type" 		: "deposit",
-					"accountNum": 1,
-					"amount"	: 50,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "deposit",
-					"accountNum": 1,
-					"amount"	: 30,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "deposit",
-					"accountNum": 2,
-					"amount"	: 100,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "deposit",
 					"accountNum": 2,
 					"amount"	: 50,
 					"bank"		: "TFCU"
 				},
 				{
-					"type" 		: "deposit",
-					"accountNum": 2,
-					"amount"	: 30,
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 101,
 					"bank"		: "TFCU"
 				},
 				{
-					"type" 		: "deposit",
-					"accountNum": 2,
-					"amount"	: 666,
+					"type" 		: "getBalance",
+					"accountNum": 1,
 					"bank"		: "CHASE"
 				},
 				{
 					"type" 		: "deposit",
 					"accountNum": 1,
-					"amount"	: 20,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "deposit",
-					"accountNum": 1,
-					"amount"	: 333,
-					"bank"		: "CHASE"
-				},
-				{
-					"type" 		: "deposit",
-					"accountNum": 2,
-					"amount"	: 444,
-					"bank"		: "CHASE"
+					"bank"		: "CHASE",
+					"amount"	: 50
 				}
 			]	
 		}
