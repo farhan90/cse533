@@ -44,7 +44,8 @@
 					"type" 		: "withdraw",
 					"accountNum": 1,
 					"amount"	: 101,
-					"bank"		: "TFCU"
+					"bank"		: "TFCU",
+					"reqId"		: "0.1.1"
 				},
 				{
 					"type" 		: "getBalance",

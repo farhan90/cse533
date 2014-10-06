@@ -23,13 +23,13 @@ function Client(port, ip, transactions, master) {
 
 Client.prototype.sendTransaction = function(transaction, seconds) {
 	if(transaction.type == "deposit" || transaction.type == "withdraw")
-		this.sendTransactionToHead(transaction.bank, transaction.accountNum, transaction.amount, seconds, transaction.type);
+		this.sendTransactionToHead(transaction.bank, transaction.accountNum, transaction.amount, seconds, transaction.type, transaction.reqId);
 	else if(transaction.type == "getBalance")
 		this.sendTransactionToTail(transaction.bank, transaction.accountNum, seconds, transaction.type);
 }
 
-Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seconds, type) {
-	var reqId = genReqId(bank, accountNum);
+Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seconds, type, reqId) {
+	var reqId = reqId? reqId : genReqId(bank, accountNum);
 	var clientServer = this;
 	this.getHeadFromMaster(bank, function(resObj) {
 		setTimeout(function() {
