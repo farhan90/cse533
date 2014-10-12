@@ -18,14 +18,16 @@
 					"accountNum": 1,
 					"amount"	: 100,
 					"bank"		: "TFCU",
-					"timeout"	: 1
+					"timeout"	: 1,
+					"reqId"		: "0.1.1"
 				},
 				{
 					"type" 		: "withdraw",
 					"accountNum": 1,
-					"amount"	: 101,
+					"amount"	: 100,
 					"bank"		: "TFCU",
-					"timeout"	: 1
+					"timeout"	: 1,
+					"reqId"		: "0.1.1"
 				}
 				
 			]	

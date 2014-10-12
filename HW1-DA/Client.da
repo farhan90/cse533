@@ -1,5 +1,8 @@
 import sys
 
+'''This is a client process
+handles all the client transactions'''
+
 class Client(process):
     def setup(master, clientNum,transList):
         self.reqCount = 0
@@ -51,6 +54,10 @@ class Client(process):
         # }, 1)
         await(False)
 
+
+    '''A helper method to send transaction depending on the
+    type of transaction'''
+
     def sendTransaction(transaction, time):
 
         if await(False): pass
@@ -61,6 +68,9 @@ class Client(process):
             else:
                 getHead(transaction)
     
+
+    '''Handler functions for send and receiving messages'''
+
     def getTail(transaction):
         send(('getTail', transaction), to=master)
     

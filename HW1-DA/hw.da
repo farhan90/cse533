@@ -1,7 +1,8 @@
 import sys
 import json
 
-
+''' The launcher class which reads the config file,
+initializes the servers, clients and master'''
 
 def main():
     

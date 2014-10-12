@@ -1,5 +1,8 @@
 import sys
 
+'''This is the server class which handles requests from clients
+and master'''
+
 class Server(process):
     def setup(master, bank):
     	self.accounts = {}
@@ -7,6 +10,8 @@ class Server(process):
     	self.pred = None
     	self.pendingList = []
     	self.proccessedTrans = {}
+
+
 
     def main():
     	getSucAndPred()
@@ -38,6 +43,9 @@ class Server(process):
     				return False
     	return True
 
+
+
+    '''This function handles all the request from clients'''    
     def handleTransaction(type, req, p):
     	if self.pred == None:
         	req['sender'] = p
@@ -79,6 +87,10 @@ class Server(process):
     			'accountNum' : req['accountNum']
     		}
     		send(('response', sendData), to=req['sender'])
+
+
+
+    '''Message handlers'''
 
     def receive(msg=('withdraw', req), from_=p):
     	output("Server recieved withdraw\n" + str(req))

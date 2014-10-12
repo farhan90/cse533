@@ -1,5 +1,8 @@
 import sys
 
+'''The master class, it's responsible to serving request for the head and tail
+servers of a bank. It also tells each server it's successor and predecessor'''
+
 class Master(process):
     def setup(servers): pass
 
