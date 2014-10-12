@@ -36,7 +36,8 @@ def main():
         start(servers[key])
     
 
-
+    i=1
     for key in clients:
-        setup(clients[key][0], (master, 1, clients[key][1]))
+        setup(clients[key][0], (master, i, clients[key][1]))
         start(clients[key][0])
+        i+=1
