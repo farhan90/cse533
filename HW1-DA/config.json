@@ -1,0 +1,34 @@
+{
+
+	"banks" : [
+		{
+			"name" 	: "TFCU",
+			"chainLength"	: 3
+		},
+		{
+			"name" 	: "CHASE",
+			"chainLength"	: 2
+		}
+	],
+	"clients" : [
+		{
+			"transactions" 	: [
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 100,
+					"bank"		: "TFCU",
+					"timeout"	: 1
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 101,
+					"bank"		: "TFCU",
+					"timeout"	: 1
+				}
+				
+			]	
+		}
+	]
+}
