@@ -1,0 +1,84 @@
+import sys
+
+class Client(process):
+    def setup(master, clientNum):
+        self.reqCount = 0
+        self.bankNames = ['TFCU', 'CHASE']
+
+    def main():
+        sendTransaction({
+            'accountNum' : 12,
+            'type' : 'deposit',
+            'amount' : 100,
+            'bank' : 'TFCU',
+        }, 1)
+        sendTransaction({
+            'accountNum' : 12,
+            'type' : 'getBalance',
+            'bank' : 'TFCU',
+        }, 1)
+        # sendTransaction({
+        #     'accountNum' : 12,
+        #     'type' : 'withdraw',
+        #     'amount' : 50,
+        #     'bank' : 'TFCU'
+        # }, 1)
+
+        # sendTransaction({
+        #     'accountNum' : 1,
+        #     'type' : 'deposit',
+        #     'amount' : 50,
+        #     'bank' : 'CHASE'
+        # }, 1)
+
+        # sendTransaction({
+        #     'accountNum' : 1,
+        #     'type' : 'withdraw',
+        #     'amount' : 50,
+        #     'bank' : 'CHASE'
+        # }, 1)
+        await(False)
+
+    def sendTransaction(transaction, time):
+
+        if await(False): pass
+        elif timeout(time): 
+            output("SENDING TRANSACTION\n");
+            if transaction['type'] == 'getBalance':
+                getTail(transaction)
+            else:
+                getHead(transaction)
+    
+    def getTail(transaction):
+        send(('getTail', transaction), to=master)
+    
+    def receive(msg=('getTail',tail, transaction), from_=p):
+        reqId = transaction.get('reqId', None)
+        if reqId == None:
+            reqId = genReqId(transaction['bank'])
+        transaction['reqId'] = reqId
+        send(('getBalance', transaction), to=tail)
+
+    def getHead(transaction):
+        send(('getHead',transaction), to=master)
+
+    def receive(msg=('getHead',head, transaction), from_=p):
+        reqId = transaction.get('reqId', None)
+        if reqId == None:
+            reqId = genReqId(transaction['bank'])
+        sendToServer(transaction['type'], transaction['accountNum'], transaction['amount'], transaction['bank'], reqId, head)
+
+    def sendToServer(type, accountNum, amount, bank, reqId, head):
+        send((type, {
+            'reqId' : reqId,
+            'accountNum' : accountNum,
+            'amount' : amount
+        }), to=head)
+
+    def receive(msg=('response',message), from_=p):
+        output("Client received: " + str(message))
+
+    def genReqId(bank):
+        index = bankNames.index(bank)
+        reqCount += 1
+        return (str(index) + "." + str(clientNum) + "." + str(reqCount))

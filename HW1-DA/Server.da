@@ -1,0 +1,100 @@
+import sys
+
+class Server(process):
+    def setup(master, bank):
+    	self.accounts = {}
+    	self.suc = None
+    	self.pred = None
+    	self.pendingList = []
+    	self.proccessedTrans = {}
+
+    def main():
+    	getSucAndPred()
+    	await(False)
+
+    def getSucAndPred():
+    	send(('getSucAndPred', bank), to=master)
+
+    def receive(msg=('getSucAndPred', newSuc, newPred), from_=p):
+    	self.suc = newSuc
+    	self.pred = newPred
+    	output("bank: " + bank +"\n" "suc: " + str(suc) + "\npred:" + str(pred) + "\n")
+
+    def receive(msg=('messageFromSuc', req), from_=p): 
+    	self.pendingList.pop(self.pendingList.index(req))
+    	output('pendingList.pop: ' + str(self.pendingList))
+    	if self.pred != None:
+    		output(bank + ' sending to pred')
+    		send(('messageFromSuc', req), to=self.pred)
+
+    def compareReq(d1, d2):
+    	for key in d1:
+    		if key != 'sender':
+    			if d1[key] != d2[key]:
+    				return False
+    	for key in d2:
+    		if key != 'sender':
+    			if d1[key] != d2[key]:
+    				return False
+    	return True
+
+    def handleTransaction(type, req, p):
+    	if self.pred == None:
+        	req['sender'] = p
+        
+    	accountNum = req['accountNum']
+    	if accounts.get(req['accountNum'], None) == None:
+    		accounts[accountNum] = 0
+
+    	outcome = ""
+    	if self.proccessedTrans.get(req['reqId'], None) == None:
+    		if type == 'deposit':
+        		accounts[accountNum] += req['amount']
+        		outcome = "Processed"
+        		self.proccessedTrans[req['reqId']] = req
+    		elif type=='withdraw':
+        		if accounts[accountNum] >= req['amount']:
+        			accounts[accountNum] -= req['amount']
+        			outcome = "Processed"
+        			self.proccessedTrans[req['reqId']] = req
+        		else:
+        			outcome = 'InsufficientFunds'
+    	else: 
+    		if compareReq(req, self.proccessedTrans[req['reqId']]):
+    			outcome = "Processed"
+    		else:
+    			outcome = "IncosistentHistory"
+
+    	if self.suc != None:
+    		self.pendingList.append(req)
+    		output('pendingList.append: ' + str(self.pendingList))
+    		send((type, req), to=self.suc)
+    	else:
+    		output(bank + ' sending to pred')
+    		send(('messageFromSuc', req), to=self.pred)
+    		sendData = {
+    			'reqId' : req['reqId'],
+    			'outcome' : outcome,
+    			'balance' : accounts[accountNum],
+    			'accountNum' : req['accountNum']
+    		}
+    		send(('response', sendData), to=req['sender'])
+
+    def receive(msg=('withdraw', req), from_=p):
+    	output("Server recieved withdraw\n" + str(req))
+    	handleTransaction('withdraw', req, p)
+    
+    def receive(msg=('deposit', req), from_=p):
+        output("Server recieved deposit\n" + str(req))
+        handleTransaction('deposit', req, p)
+    
+    def receive(msg=('getBalance', req), from_=p):
+        output("Server recieved getBalance\n" + str(req))
+        bal = self.accounts.get(req['accountNum'], 0)
+        sendData = {
+    		'reqId' : req['reqId'],
+    		'outcome' : 'Processed',
+    		'balance' : bal,
+    		'accountNum' : req['accountNum']
+    	}
+        send(('response', sendData), to=p)

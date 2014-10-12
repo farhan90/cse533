@@ -1,0 +1,27 @@
+import sys
+
+class Master(process):
+    def setup(servers): pass
+
+    def main():
+        await(False)
+
+    def receive(msg=('getTail', transaction), from_=p):
+    	output("Master recieved getTail for : " + transaction['bank'])
+    	send(('getTail', servers[transaction['bank']][len(servers[transaction['bank']])-1], transaction), to=p)
+
+    def receive(msg=('getHead', transaction), from_=p):
+    	output("Master recieved getHead for : " + transaction['bank'])
+    	send(('getHead', servers[transaction['bank']][0], transaction), to=p)
+
+    def receive(msg=('getSucAndPred', bank), from_=p):
+    	index = servers[bank].index(p)
+    	pred = None
+    	suc = None
+
+    	if (index+1) < len(servers[bank]):
+    		suc = servers[bank][index+1]    	
+    	if index > 0:
+    		pred = servers[bank][index-1]
+
+    	send(('getSucAndPred', suc, pred), to=p)

@@ -1,0 +1,31 @@
+import sys
+
+def main():
+    Server = import_da('Server')
+    Client = import_da('Client')
+    Master = import_da('Master')
+    
+    tfcu = list(new(Server.Server, num= 3))
+    chase = list(new(Server.Server, num= 2))
+
+    client = new(Client.Client)
+    servers = {
+        'TFCU': tfcu,
+        'CHASE': chase
+    }
+
+
+    master = new(Master.Master, [servers], num=1)
+
+
+    setup(client, (master, 1))
+    setup(chase, (master, 'CHASE'))
+    setup(tfcu, (master, 'TFCU'))
+
+
+
+    start(master)
+    start(chase)
+    start(tfcu)
+    start(client)
+    
