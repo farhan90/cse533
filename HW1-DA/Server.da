@@ -20,6 +20,8 @@ class Server(process):
     def getSucAndPred():
     	send(('getSucAndPred', bank), to=master)
 
+
+    '''Message handlers'''    
     def receive(msg=('getSucAndPred', newSuc, newPred), from_=p):
     	self.suc = newSuc
     	self.pred = newPred
@@ -32,6 +34,8 @@ class Server(process):
     		output(bank + ' sending to pred')
     		send(('messageFromSuc', req), to=self.pred)
 
+
+    '''A helper function to compare two dictionaries'''        
     def compareReq(d1, d2):
     	for key in d1:
     		if key != 'sender':
