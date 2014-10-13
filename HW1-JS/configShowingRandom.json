@@ -1,5 +1,5 @@
 {
-	"comment" : "This config shows deposit, withdraw, failed withdraw, and getBalance all one one account. It also shows how to manually set the reqId, the two last transactions share a reqId w/ the first transaction. One will produce an outcome of Processed the other InconsistentHistory",
+	"comment" : "This config shows how to setup random requests",
 	"master" : {
 		"ip" : "127.0.0.1",
 		"port" : 8023
@@ -30,26 +30,11 @@
 			"ip"			: "127.0.0.1",
 			"random" : {
 				"seed" : 5,
-				"numReq" : 4,
-				"probGetBalance" : 0.5,
-				"probDeposit" : 0.25,
-				"probWithdraw" : 0.25
-			},
-			"transactions" 	: [
-				{
-					"type" 		: "deposit",
-					"accountNum": 1,
-					"amount"	: 100,
-					"bank"		: "TFCU",
-					"reqId"		: "5.5.5"
-				},
-				{
-					"type" 		: "withdraw",
-					"accountNum": 1,
-					"amount"	: 25,
-					"bank"		: "TFCU"
-				}
-			]	
+				"numReq" : 15,
+				"probGetBalance" : 0.1,
+				"probDeposit" : 0.75,
+				"probWithdraw" : 0.15
+			}
 		}
 	]
 }

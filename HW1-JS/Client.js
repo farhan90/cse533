@@ -1,8 +1,8 @@
 var http = require('http');
 
 module.exports = {
-	createClient: function(port, ip, transactions, randomData, master, bankNames) {
-		return new Client(port, ip, transactions, randomData, master, bankNames);
+	createClient: function(port, ip, transactions, randomData, master, bankNames, clientNum) {
+		return new Client(port, ip, transactions, randomData, master, bankNames, clientNum);
 	}
 };
 
@@ -31,11 +31,14 @@ function randomInt (low, high) {
 
 
 //constructor for Client class
-function Client(port, ip, transactions, randomData, master, bankNames) {
+function Client(port, ip, transactions, randomData, master, bankNames, clientNum) {
 	//transactions list of {type, accountNum, amount, bank}
 	this.transactions = transactions;
 	this.port = port;
 	this.ip = ip;
+
+	this.clientNum = clientNum;
+	this.reqCount = 0;
 
 	this.bankNames = bankNames;
 
@@ -57,7 +60,7 @@ function Client(port, ip, transactions, randomData, master, bankNames) {
 			if(randReq == "getBalance") {
 				var transaction = {
 					"type" : "getBalance",
-					"accountNum" : randomInt(0, 10),
+					"accountNum" : randomInt(0, 5),
 					"bank" : this.randBank()
 				}
 				this.sendTransaction(transaction, i*2);
@@ -65,7 +68,7 @@ function Client(port, ip, transactions, randomData, master, bankNames) {
 			else {
 				var transaction = {
 					"type" : (randomInt(0,100) < 50)? "deposit" : "withdraw",
-					"accountNum" : randomInt(0, 10),
+					"accountNum" : randomInt(0, 5),
 					"bank" : this.randBank(),
 					"amount" : randomInt(0, 100)
 				}
@@ -86,7 +89,7 @@ Client.prototype.sendTransaction = function(transaction, seconds) {
 }
 
 Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seconds, type, reqId) {
-	var reqId = reqId? reqId : genReqId(bank, accountNum);
+	var reqId = reqId? reqId : this.genReqId(bank);
 	var clientServer = this;
 
 	//get the head, on completion send the request
@@ -107,7 +110,7 @@ Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seco
 }
 
 Client.prototype.sendTransactionToTail = function(bank, accountNum, seconds, type) {
-	var reqId = genReqId(bank, accountNum);
+	var reqId = this.genReqId(bank);
 	var clientServer = this;
 
 	//get the tail, on completion send the request
@@ -161,7 +164,7 @@ function sendRequest(ip, portNum, reqObj, callback) {
 	};
 	reqObj['sender'] = reqObj.client;
 	if(reqObj.client != null) {
-		console.log("\nCLIENT SENDING REQUEST!! : " + JSON.stringify(reqObj) + ": ip: " + ip + ", port: "+ portNum);
+		console.log("\nCLIENT SENDING REQUEST!! : " + JSON.stringify(reqObj) + ": ip: " + ip + ", port: "+ portNum + "\n");
 	}
 
 	var req = http.request(options, (callback != null)? callback : handleResponse);
@@ -188,15 +191,14 @@ function handleResponse(response) {
 }
 
 //helper for generating request id
-function genReqId(bank, accountNum) {
+Client.prototype.genReqId = function(bank) {
 	arguments.callee.banks = arguments.callee.banks || [];
 	var allBanks = arguments.callee.banks;
 	if(allBanks.indexOf(bank) == -1)
 		allBanks.push(bank);
 	var bnkNum = allBanks.indexOf(bank);
 
-	arguments.callee.count = ++arguments.callee.count || 1
-	var reqId = bnkNum + "."  + accountNum + "." + arguments.callee.count;
+	var reqId = bnkNum + "."  + this.clientNum + "." + this.reqCount++;
 	return reqId;
 }
 

@@ -45,6 +45,8 @@ It also shows how to manually set the reqId, the two last transactions share a r
 One will produce an outcome of Processed, the other InconsistentHistory
 
 The config file 'configShowingRandom.json' shows how to setup the randomization
-
 Both 'random' and 'transaction' keys are optional
+
+multipleAccountsAndBanks.json shows how to use multiple accounts and banks
+multipleClients.json shows how to use multiple clients
 

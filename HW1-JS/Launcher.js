@@ -46,7 +46,7 @@ for(var bankName in bankServers) {
 for(var i in config.clients) {
 	var clientData = config.clients[i];
 	console.log(clientData.random);
-	var c = client.createClient(clientData.port, clientData.ip, clientData.transactions, clientData.random, config.master, bankNames);
+	var c = client.createClient(clientData.port, clientData.ip, clientData.transactions, clientData.random, config.master, bankNames, i);
 }
 
 
