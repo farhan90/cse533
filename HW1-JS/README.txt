@@ -27,7 +27,13 @@ NodeJS:
     })
 
 DistAlgo:
-TODO: Farhan
+- DistAlgo is much easier to use for communications between processes
+  with the send and receive function
+- There seems to be a bug in the compiler when trying to use the 
+  output function after an if statement
+
+- The compiler is not very friendly in terms of error messages
+
 
 CONTRIBUTIONS:
 Jimmy: NodeJS
