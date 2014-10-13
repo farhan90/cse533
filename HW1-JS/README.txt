@@ -4,6 +4,12 @@ INSTRUCTIONS:
 To run: node Launcher.js        			- will run w/ with the default config, config.json
 Optional: node Launcher.js input.json		- will run w/ the specifed file, input.json
 
+To log to an output file
+
+node Launcher.js > outputfilename.txt
+or
+node Launcher.js configfilename.json > outputfilename.txt
+
 You must have node.js installed
 http://nodejs.org
 
@@ -27,12 +33,16 @@ NodeJS:
     })
 
 DistAlgo:
+
 - DistAlgo is much easier to use for communications between processes
   with the send and receive function
 - There seems to be a bug in the compiler when trying to use the 
   output function after an if statement
 
 - The compiler is not very friendly in terms of error messages
+
+
+Please read the README in the DistAlgo portion
 
 
 CONTRIBUTIONS:
@@ -45,5 +55,8 @@ It also shows how to manually set the reqId, the two last transactions share a r
 One will produce an outcome of Processed, the other InconsistentHistory
 
 The config file 'configShowingRandom.json' shows how to setup the randomization
-
 Both 'random' and 'transaction' keys are optional
+
+multipleAccountsAndBanks.json shows how to use multiple accounts and banks
+multipleClients.json shows how to use multiple clients
+
