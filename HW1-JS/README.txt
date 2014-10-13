@@ -37,3 +37,7 @@ OTHER COMMENTS:
 The default config file 'config.json' shows deposit, withdraw, failed withdraw, and getBalance all one one account. 
 It also shows how to manually set the reqId, the two last transactions share a reqId w/ the first transaction. 
 One will produce an outcome of Processed, the other InconsistentHistory
+
+The config file 'configShowingRandom.json' shows how to setup the randomization
+
+Both 'random' and 'transaction' keys are optional
