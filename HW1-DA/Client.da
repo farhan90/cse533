@@ -33,6 +33,7 @@ class Client(process):
         await(False)
 
 
+    """Method for generating a random request"""    
     def getRandomTransaction():
         index=random.randint(0,len(bankNames)-1) #inclusive 
         bank=bankNames[index]
