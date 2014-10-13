@@ -24,7 +24,8 @@
 					"type" 		: "withdraw",
 					"accountNum": 1,
 					"amount"	: 25,
-					"bank"		: "TFCU"
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6"
 				},
 				{
 					"type" 		: "withdraw",
@@ -50,6 +51,20 @@
 					"amount"	: 101,
 					"bank"		: "TFCU",
 					"reqId"		: "5.5.5"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 25,
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 100,
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6"
 				}
 				
 			]	

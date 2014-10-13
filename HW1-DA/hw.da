@@ -17,6 +17,8 @@ def main():
     json_data=open(sys.argv[1])
     data=json.load(json_data)
     
+
+    """Creating client processes"""
     clients={}
     for i in range(len(data["clients"])):
         client = new(Client.Client)
@@ -24,7 +26,7 @@ def main():
         random=data["clients"][i].get("random",None)
         clients[i]=[client,transList,random]
 
-
+    """Creating server processes"""    
     servers={}
     banks=[]
     for i in range(len(data["banks"])):
@@ -39,11 +41,12 @@ def main():
     start(master)
 
 
+    """Setting up and starting server processes"""
     for key in servers:
         setup(servers[key],(master,key))
         start(servers[key])
     
-
+    """Setting up and starting client processes"""
     i=1
     for key in clients:
         setup(clients[key][0], (master, i, clients[key][1],clients[key][2],banks))
