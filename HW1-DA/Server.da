@@ -97,15 +97,15 @@ class Server(process):
     '''Message handlers'''
 
     def receive(msg=('withdraw', req), from_=p):
-    	output("Server recieved withdraw\n" + str(req))
+    	output(bank+" SERVER RECEIVED WITHDRAW\n" + str(req)+"\n")
     	handleTransaction('withdraw', req, p)
     
     def receive(msg=('deposit', req), from_=p):
-        output("Server recieved deposit\n" + str(req))
+        output(bank+" SERVER  RECEIVED DEPOSIT\n" + str(req)+"\n")
         handleTransaction('deposit', req, p)
     
     def receive(msg=('getBalance', req), from_=p):
-        output("Server recieved getBalance\n" + str(req))
+        output(bank+" SERVER RECEIVED GETBALANCE\n" + str(req)+"\n")
         bal = self.accounts.get(req['accountNum'], 0)
         sendData = {
     		'reqId' : req['reqId'],

@@ -29,5 +29,12 @@ For language comparisons refer to the README for NodeJS
 
 
 
+NOTES:
+The config.json file contains test cases to test for deposit,withdraw and get balance
+it also tests for Insufficient funds and inconsistent with history errors
 
+The config_random.json file generates random requests to the servers
+
+The config_multiple_clients.json tests deposit and withdraw transaction
+by multiple clients.
 

@@ -24,8 +24,8 @@ class Client(process):
 
         if randomReq!=None:
             random.seed(randomReq["seed"])
-            for i in range(randomReq["numReq"]):
-                output("GENERATING RANDOM REQUEST")
+            output("GENERATING RANDOM REQUEST")
+            for i in range(randomReq["numReq"]):      
                 transaction=getRandomTransaction() 
                 sendTransaction(transaction,i*2)  
 
@@ -64,7 +64,7 @@ class Client(process):
 
         if await(False): pass
         elif timeout(time): 
-            output("SENDING TRANSACTION\n"+str(transaction));
+            output("SENDING TRANSACTION (CLIENT NUM: "+str(clientNum)+") \n"+str(transaction)+"\n");
             if transaction['type'] == 'getBalance':
                 getTail(transaction)
             else:
@@ -100,7 +100,7 @@ class Client(process):
         }), to=head)
 
     def receive(msg=('response',message), from_=p):
-        output("Client received: " + str(message))
+        output("CLIENT RECEIVED: (CLIENT NUM: "+str(clientNum)+") " + str(message)+"\n")
 
     def genReqId(bank):
         index = bankNames.index(bank)
