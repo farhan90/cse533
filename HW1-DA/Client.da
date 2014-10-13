@@ -1,59 +1,62 @@
 import sys
+import random
 
 '''This is a client process
 handles all the client transactions'''
 
 class Client(process):
-    def setup(master, clientNum,transList):
+    def setup(master, clientNum,transList,randomReq,bankNames):
         self.reqCount = 0
-        self.bankNames = ['TFCU', 'CHASE']
+        
 
     def main():
-        output("In client main\n")
-        for i in range(len(transList)):
-            transaction={}
-            transaction['accountNum']=transList[i]['accountNum']
-            transaction['type']=transList[i]['type']
-            transaction['amount']=transList[i]['amount']
-            transaction['bank']=transList[i]['bank']
-            transaction['reqId']=transList[i].get('reqId',None)
-            timeout=transList[i].get('timeout',1)
-            sendTransaction(transaction,timeout)
+        
+        if(transList!=None):
+            for i in range(len(transList)):
+                transaction={}
+                transaction['accountNum']=transList[i]['accountNum']
+                transaction['type']=transList[i]['type']
+                transaction['amount']=transList[i].get('amount',0)
+                transaction['bank']=transList[i]['bank']
+                transaction['reqId']=transList[i].get('reqId',None)
+                timeout=transList[i].get('timeout',1)
+                sendTransaction(transaction,timeout)
 
+        if randomReq!=None:
+            random.seed(randomReq["seed"])
+            for i in range(randomReq["numReq"]):
+                output("GENERATING RANDOM REQUEST")
+                transaction=getRandomTransaction() 
+                sendTransaction(transaction,i*2)  
 
-        # sendTransaction({
-        #     'accountNum' : 12,
-        #     'type' : 'deposit',
-        #     'amount' : 100,
-        #     'bank' : 'TFCU',
-        # }, 1)
-        # sendTransaction({
-        #     'accountNum' : 12,
-        #     'type' : 'getBalance',
-        #     'bank' : 'TFCU',
-        # }, 1)
-        # sendTransaction({
-        #     'accountNum' : 12,
-        #     'type' : 'withdraw',
-        #     'amount' : 50,
-        #     'bank' : 'TFCU'
-        # }, 1)
-
-        # sendTransaction({
-        #     'accountNum' : 1,
-        #     'type' : 'deposit',
-        #     'amount' : 50,
-        #     'bank' : 'CHASE'
-        # }, 1)
-
-        # sendTransaction({
-        #     'accountNum' : 1,
-        #     'type' : 'withdraw',
-        #     'amount' : 50,
-        #     'bank' : 'CHASE'
-        # }, 1)
+        
         await(False)
 
+
+    def getRandomTransaction():
+        index=random.randint(0,len(bankNames)-1) #inclusive 
+        bank=bankNames[index]
+        reqType=getRandomReqType()
+        amount=random.randint(0,100)
+        accountNum=random.randint(0,10)
+        transaction={
+            'accountNum' : accountNum,
+            'type' : reqType,
+            'amount' : amount,
+            'bank' : bank
+        }
+        return transaction
+
+    def getRandomReqType():
+        randNum=random.random()
+
+        if randNum<randomReq['probGetBalance']:
+            return "getBalance"
+        if randNum<randomReq['probWithdraw']:
+            return "withdraw"
+    
+        return "deposit"
+        
 
     '''A helper method to send transaction depending on the
     type of transaction'''
@@ -62,7 +65,7 @@ class Client(process):
 
         if await(False): pass
         elif timeout(time): 
-            output("SENDING TRANSACTION\n");
+            output("SENDING TRANSACTION\n"+str(transaction));
             if transaction['type'] == 'getBalance':
                 getTail(transaction)
             else:

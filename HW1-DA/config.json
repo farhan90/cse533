@@ -12,25 +12,51 @@
 	],
 	"clients" : [
 		{
-			"transactions" 	: [
+			
+		"transactions" 	: [
 				{
 					"type" 		: "deposit",
 					"accountNum": 1,
 					"amount"	: 100,
 					"bank"		: "TFCU",
+					"timeout"	: 1
+					
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 50,
+					"bank"		: "TFCU",
+					"timeout"	: 1
+					
+				},
+				{
+					"type" 		: "getBalance",
+					"accountNum": 1,
+					"bank"		: "TFCU",
+					"timeout"	: 1
+					
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 101,
+					"bank"		: "TFCU",
 					"timeout"	: 1,
-					"reqId"		: "0.1.1"
+					"reqId"		:"0.1.1"
+					
 				},
 				{
 					"type" 		: "withdraw",
 					"accountNum": 1,
 					"amount"	: 100,
 					"bank"		: "TFCU",
-					"timeout"	: 1,
-					"reqId"		: "0.1.1"
+					"timeout"	: 1
+					
 				}
-				
+
 			]	
+			
 		}
 	]
 }

@@ -10,22 +10,29 @@ def main():
     Client = import_da('Client')
     Master = import_da('Master')
 
-    json_data=open('config.json')
+    if len(sys.argv)<2:
+        print("Please enter a config file\n")
+        sys.exit(1)
+
+    json_data=open(sys.argv[1])
     data=json.load(json_data)
     
     clients={}
     for i in range(len(data["clients"])):
         client = new(Client.Client)
-        transList=data["clients"][i]["transactions"]
-        clients[i]=[client,transList]
+        transList=data["clients"][i].get("transactions",None)
+        random=data["clients"][i].get("random",None)
+        clients[i]=[client,transList,random]
 
 
     servers={}
+    banks=[]
     for i in range(len(data["banks"])):
         bank=data["banks"][i]["name"]
         chainLength=data["banks"][i]["chainLength"]
         server=list(new(Server.Server, num= chainLength))
         servers[bank]=server
+        banks.append(bank)
 
 
     master = new(Master.Master, [servers], num=1)
@@ -39,6 +46,6 @@ def main():
 
     i=1
     for key in clients:
-        setup(clients[key][0], (master, i, clients[key][1]))
+        setup(clients[key][0], (master, i, clients[key][1],clients[key][2],banks))
         start(clients[key][0])
         i+=1

@@ -1,0 +1,33 @@
+Readme for the DistAlgo version
+
+The main classes:
+
+hw.da - the main launcher class, will setup everything
+Master.da - the master class which handles all master's functions
+Server.da - the server class to handle all the server duties
+Client.da - the client class to handle all the client duties
+
+
+INSTRUCTIONS:
+To start the servers, clients and master do:
+	dar -f hw.da <config filename>
+
+We need to provide a config filename or the launcher will not start.
+We decided to use a json file similar to our config file for NodeJS
+
+
+BUGS AND LIMITATIONS:
+- Bugs:
+  - Do not support malformed config files
+
+- Limitations:
+	- DistAlgo does not support creation of processes in different
+	nodes.
+
+
+For language comparisons refer to the README for NodeJS
+
+
+
+
+
