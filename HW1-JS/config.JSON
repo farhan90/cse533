@@ -1,4 +1,5 @@
 {
+	"comment" : "This config shows deposit, withdraw, failed withdraw, and getBalance all one one account. It also shows how to manually set the reqId, the two last transactions share a reqId w/ the first transaction. One will produce an outcome of Processed the other InconsistentHistory",
 	"master" : {
 		"ip" : "127.0.0.1",
 		"port" : 8023
@@ -8,19 +9,19 @@
 			"name" 	: "TFCU",
 			"port" 	: 5600,
 			"ip"	: "127.0.0.1",
-			"chainLength"	: 7
+			"chainLength"	: 2
 		},
 		{
 			"name" 	: "CHASE",
 			"port" 	: 5700,
 			"ip"	: "127.0.0.1",
-			"chainLength"	: 5
+			"chainLength"	: 3
 		},
 		{
 			"name" 	: "Bank of America",
 			"port" 	: 5800,
 			"ip"	: "127.0.0.1",
-			"chainLength"	: 5
+			"chainLength"	: 3
 		}
 	],
 	"clients" : [
@@ -32,31 +33,39 @@
 					"type" 		: "deposit",
 					"accountNum": 1,
 					"amount"	: 100,
-					"bank"		: "TFCU"
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5"
 				},
 				{
-					"type" 		: "deposit",
-					"accountNum": 2,
-					"amount"	: 50,
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 25,
 					"bank"		: "TFCU"
 				},
 				{
 					"type" 		: "withdraw",
 					"accountNum": 1,
-					"amount"	: 101,
-					"bank"		: "TFCU",
-					"reqId"		: "0.1.1"
+					"amount"	: 100,
+					"bank"		: "TFCU"
 				},
 				{
 					"type" 		: "getBalance",
 					"accountNum": 1,
-					"bank"		: "CHASE"
+					"bank"		: "TFCU"
 				},
 				{
 					"type" 		: "deposit",
 					"accountNum": 1,
-					"bank"		: "CHASE",
-					"amount"	: 50
+					"amount"	: 100,
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5"
+				},
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 101,
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5"
 				}
 			]	
 		}

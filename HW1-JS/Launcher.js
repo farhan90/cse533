@@ -1,11 +1,22 @@
 var bankServer = require('./BankServer');
 var client = require('./Client');
 var master = require('./Master');
-var config = require('./config.json');
+var config = ''
+
+//arguments
+process.argv.forEach(function (val, index, array) {
+	console.log(index + ': ' + val);
+	if(index == 2)
+		config = './' + val;
+});
+if(config == '') 
+	config = './config.json';
+config = require(config);
 
 //pragma mark - setup banks
 var banks = {};
 var bankServers = {};
+var bankNames = [];
 for(var i in config.banks) {
 	var bank = config.banks[i];
 	banks[bank.name] = [];
@@ -17,6 +28,7 @@ for(var i in config.banks) {
 			"ip" 	: bnk.ip
 		});
 		bankServers[bank.name].push(bnk);
+		bankNames.push(bank.name);
 	}
 }
 
@@ -33,7 +45,8 @@ for(var bankName in bankServers) {
 //pragma mark - setup clients
 for(var i in config.clients) {
 	var clientData = config.clients[i];
-	var c = client.createClient(clientData.port, clientData.ip, clientData.transactions, config.master);
+	console.log(clientData.random);
+	var c = client.createClient(clientData.port, clientData.ip, clientData.transactions, clientData.random, config.master, bankNames);
 }
 
 

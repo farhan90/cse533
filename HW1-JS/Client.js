@@ -1,22 +1,70 @@
 var http = require('http');
 
 module.exports = {
-	createClient: function(port, ip, transactions, master) {
-		return new Client(port, ip, transactions, master);
+	createClient: function(port, ip, transactions, randomData, master, bankNames) {
+		return new Client(port, ip, transactions, randomData, master, bankNames);
 	}
 };
 
-function Client(port, ip, transactions, master) {
+Client.prototype.randRequest = function() {
+	var randNum = Math.random();
+	if(randNum < this.random.probGetBalance)
+		return "getBalance";
+	randNum -= this.random.probWithdraw;
+	if(randNum < this.random.probDeposit)
+		return "deposit";
+	return "withdraw";
+}
+
+Client.prototype.randBank = function() {
+	var randNum = randomInt(0, this.bankNames.length);
+	return this.bankNames[randNum];
+}
+
+function randomInt (low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}
+
+function Client(port, ip, transactions, randomData, master, bankNames) {
 	//transactions list of {type, accountNum, amount, bank}
 	this.transactions = transactions;
 	this.port = port;
 	this.ip = ip;
 
+	this.bankNames = bankNames;
+
+	// random dict of {seed, numReq, probGetBalance, probDeposit, probWithdraw
+	this.random = randomData;
+	console.log(this.random);
 	//master {ip, port}
 	this.master = master;
 
 	for(var i in transactions)
 		this.sendTransaction(transactions[i], i*2);
+
+	if(this.random) {
+		//create random requests
+		for(var i = 0; i<this.random.numReq; i++) {
+			var randReq = this.randRequest();
+			if(randReq == "getBalance") {
+				var transaction = {
+					"type" : "getBalance",
+					"accountNum" : randomInt(0, 10),
+					"bank" : this.randBank()
+				}
+				this.sendTransaction(transaction, i*2);
+			}
+			else {
+				var transaction = {
+					"type" : (randomInt(0,100) < 50)? "deposit" : "withdraw",
+					"accountNum" : randomInt(0, 10),
+					"bank" : this.randBank(),
+					"amount" : randomInt(0, 100)
+				}
+				this.sendTransaction(transaction, i*2);
+			}
+		}
+	}
 
 	this.createServer();
 }
@@ -153,6 +201,6 @@ Client.prototype.createServer = function() {
 }
 
 function recieved(data, response, clientServer) {
-	console.log("Client recieved: " + JSON.stringify(data));
+	console.log("\n\nCLIENT RECIEVED: " + JSON.stringify(data) + "\n\n");
 }
 

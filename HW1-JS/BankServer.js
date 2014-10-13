@@ -158,13 +158,13 @@ function normalTransaction(data, response, bankServer) {
 
 function compareData(d1, d2) {
 	for(var key1 in d1) {
-		if(key1 != "sender") {
+		if(key1 != "sender" && key1 != "client") {
 			if(d1[key1] != d2[key1])
 				return false;
 		}
 	}
 	for(var key2 in d2) {
-		if(key2 != "sender") {
+		if(key2 != "sender" && key2 != "client") {
 			if(d1[key2] != d2[key2])
 				return false;
 		}
