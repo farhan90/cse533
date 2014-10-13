@@ -1,0 +1,71 @@
+0: node
+1: /Users/jamesbouker/Desktop/CSE 533/HW1-JS/Launcher.js
+Master attempting to listen on: 8023
+undefined
+undefined
+Client: Attempting to listen on: 6000
+
+CLIENT SENDING REQUEST!! : {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5600
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+BS: created account: 1
+Sending to suc: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS: created account: 1
+Sending to client: {"reqId":"5.5.5","outcome":"Proccessed","balance":100}
+
+
+CLIENT RECIEVED: {"reqId":"5.5.5","outcome":"Proccessed","balance":100}
+
+
+BS Removing {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}, from pendingList
+
+CLIENT SENDING REQUEST!! : {"reqId":"0.1.1","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5600
+BS Data: {"reqId":"0.1.1","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+Sending to suc: {"reqId":"0.1.1","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS Data: {"reqId":"0.1.1","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+Sending to client: {"reqId":"0.1.1","outcome":"Proccessed","balance":75}
+
+
+CLIENT RECIEVED: {"reqId":"0.1.1","outcome":"Proccessed","balance":75}
+
+
+BS Removing {"reqId":"0.1.1","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}, from pendingList
+
+CLIENT SENDING REQUEST!! : {"reqId":"0.1.2","type":"withdraw","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5600
+BS Data: {"reqId":"0.1.2","type":"withdraw","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+Sending to suc: {"reqId":"0.1.2","type":"withdraw","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS Data: {"reqId":"0.1.2","type":"withdraw","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+Sending to client: {"reqId":"0.1.2","outcome":"InsufficientFunds","balance":75}
+
+
+CLIENT RECIEVED: {"reqId":"0.1.2","outcome":"InsufficientFunds","balance":75}
+
+
+BS Removing {"reqId":"0.1.2","type":"withdraw","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}, from pendingList
+
+CLIENT SENDING REQUEST!! : {"reqId":"0.1.3","type":"getBalance","accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5601
+Get Balance Response from tail: {"reqID":"0.1.3","balance":75,"outcome":"Proccessed"}
+
+CLIENT SENDING REQUEST!! : {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5600
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+Sending to suc: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+Sending to client: {"reqId":"5.5.5","outcome":"Proccessed","balance":75}
+
+
+CLIENT RECIEVED: {"reqId":"5.5.5","outcome":"Proccessed","balance":75}
+
+
+BS Removing {"reqId":"5.5.5","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}, from pendingList
+
+CLIENT SENDING REQUEST!! : {"reqId":"5.5.5","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5600
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+Sending to suc: {"reqId":"5.5.5","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+BS Data: {"reqId":"5.5.5","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}
+Sending to client: {"reqId":"5.5.5","outcome":"IncosistentHistory","balance":75}
+
+
+CLIENT RECIEVED: {"reqId":"5.5.5","outcome":"IncosistentHistory","balance":75}
+
+
+BS Removing {"reqId":"5.5.5","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5600}}, from pendingList

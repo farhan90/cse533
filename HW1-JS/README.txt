@@ -4,6 +4,12 @@ INSTRUCTIONS:
 To run: node Launcher.js        			- will run w/ with the default config, config.json
 Optional: node Launcher.js input.json		- will run w/ the specifed file, input.json
 
+To log to an output file
+
+node Launcher.js > outputfilename.txt
+or
+node Launcher.js configfilename.json > outputfilename.txt
+
 You must have node.js installed
 http://nodejs.org
 
@@ -27,7 +33,7 @@ NodeJS:
     })
 
 DistAlgo:
-TODO: Farhan
+Please read the README in the DistAlgo portion
 
 CONTRIBUTIONS:
 Jimmy: NodeJS
@@ -41,3 +47,4 @@ One will produce an outcome of Processed, the other InconsistentHistory
 The config file 'configShowingRandom.json' shows how to setup the randomization
 
 Both 'random' and 'transaction' keys are optional
+
