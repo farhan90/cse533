@@ -1,0 +1,27 @@
+
+{
+
+	"banks" : [
+		{
+			"name" 	: "TFCU",
+			"chainLength"	: 3
+		},
+		{
+			"name" 	: "CHASE",
+			"chainLength"	: 2
+		}
+	],
+	"clients" : [
+		{
+			
+			"random" : {
+				"seed" : 5,
+				"numReq" : 10,
+				"probGetBalance" : 0.1,
+				"probDeposit" : 0.6,
+				"probWithdraw" : 0.3
+			} 
+			
+		}
+	]
+}

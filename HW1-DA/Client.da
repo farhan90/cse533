@@ -49,10 +49,9 @@ class Client(process):
 
     def getRandomReqType():
         randNum=random.random()
-
-        if randNum<randomReq['probGetBalance']:
+        if randNum<randomReq['probGetBalance'] or randomReq['probWithdraw']+randomReq['probDeposit']<randNum:
             return "getBalance"
-        if randNum<randomReq['probWithdraw']:
+        if randNum<randomReq['probWithdraw'] or randomReq['probGetBalance']+randomReq['probDeposit']<randNum:
             return "withdraw"
     
         return "deposit"
