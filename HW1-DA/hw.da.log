@@ -6025,3 +6025,355 @@ pred:('adm-129-49-234-243.wi-fi.stonybrook.edu', 21123)
 [2014-10-13 15:04:30,391]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38254)]:DEBUG: Received KeyboardInterrupt, exiting
 [2014-10-13 15:04:30,391]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21123)]:DEBUG: Received KeyboardInterrupt, exiting
 [2014-10-13 15:04:30,393]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15385)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:05:55,481]da.api:INFO: Running iteration 1 ...
+[2014-10-13 15:05:55,487]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_23848):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848) initialization complete
+[2014-10-13 15:05:55,613]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,613]da.api:DEBUG: Creating 1 instances of <class 'Client.Client'>..
+[2014-10-13 15:05:55,616]da.api:DEBUG: 1 instances of Client created.
+[2014-10-13 15:05:55,621]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_15295):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295) initialization complete
+[2014-10-13 15:05:55,622]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,624]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,624]da.api:DEBUG: Creating 1 instances of <class 'Client.Client'>..
+[2014-10-13 15:05:55,626]da.api:DEBUG: 1 instances of Client created.
+[2014-10-13 15:05:55,629]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_38777):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777) initialization complete
+[2014-10-13 15:05:55,630]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,632]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,632]da.api:DEBUG: Creating 1 instances of <class 'Client.Client'>..
+[2014-10-13 15:05:55,633]da.api:DEBUG: 1 instances of Client created.
+[2014-10-13 15:05:55,637]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_21263):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263) initialization complete
+[2014-10-13 15:05:55,638]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,639]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,640]da.api:DEBUG: Creating 3 instances of <class 'Server.Server'>..
+[2014-10-13 15:05:55,645]da.api:DEBUG: 3 instances of Server created.
+[2014-10-13 15:05:55,648]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_32861):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861) initialization complete
+[2014-10-13 15:05:55,648]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_35448):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448) initialization complete
+[2014-10-13 15:05:55,650]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,650]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,651]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_31851):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851) initialization complete
+[2014-10-13 15:05:55,653]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,654]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,654]da.api:DEBUG: Creating 2 instances of <class 'Server.Server'>..
+[2014-10-13 15:05:55,658]da.api:DEBUG: 2 instances of Server created.
+[2014-10-13 15:05:55,660]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_16537):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537) initialization complete
+[2014-10-13 15:05:55,662]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,662]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_24215):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215) initialization complete
+[2014-10-13 15:05:55,663]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,665]da.api:DEBUG: Current process is ('adm-129-49-234-243.wi-fi.stonybrook.edu', 23848)
+[2014-10-13 15:05:55,665]da.api:DEBUG: Creating 1 instances of <class 'Master.Master'>..
+[2014-10-13 15:05:55,667]da.api:DEBUG: 1 instances of Master created.
+[2014-10-13 15:05:55,671]runtime.UdpEndPoint(adm-129-49-234-243.wi-fi.stonybrook.edu_17752):DEBUG: UdpEndPoint ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752) initialization complete
+[2014-10-13 15:05:55,672]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: Sending id to parent...
+[2014-10-13 15:05:55,674]da.api:DEBUG: Starting {<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>}...
+[2014-10-13 15:05:55,674]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,674]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,674]da.api:DEBUG: Starting [<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)>, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)>]...
+[2014-10-13 15:05:55,674]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,674]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,674]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,675]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,675]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,675]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,675]da.api:DEBUG: Starting [<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)>]...
+[2014-10-13 15:05:55,676]da.api:DEBUG: Starting {<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>}...
+[2014-10-13 15:05:55,676]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,676]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,676]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,676]da.api:DEBUG: Starting {<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>}...
+[2014-10-13 15:05:55,676]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,676]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,676]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,677]da.api:DEBUG: Starting {<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>}...
+[2014-10-13 15:05:55,677]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,677]da.api:INFO: Terminating...
+[2014-10-13 15:05:55,677]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,677]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,678]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,678]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: Running setup..
+[2014-10-13 15:05:55,678]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,679]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: 'start' command received, commencing...
+[2014-10-13 15:05:55,679]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('getSucAndPred', 'CHASE')>
+[2014-10-13 15:05:55,679]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,679]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('getSucAndPred', 'CHASE')>
+[2014-10-13 15:05:55,679]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)
+[2014-10-13 15:05:55,680]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:55,680]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:55,680]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)
+[2014-10-13 15:05:55,680]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:55,681]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)>, None)>
+[2014-10-13 15:05:55,681]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)>, None)>
+[2014-10-13 15:05:55,682]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:55,682]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,682]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: bank: TFCU
+suc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+pred:None
+
+[2014-10-13 15:05:55,683]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', None, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)>)>
+[2014-10-13 15:05:55,683]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', None, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)>)>
+[2014-10-13 15:05:55,684]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:55,684]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('getSucAndPred', 'TFCU')>
+[2014-10-13 15:05:55,684]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: bank: TFCU
+suc: None
+pred:('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+
+[2014-10-13 15:05:55,685]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)>, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>)>
+[2014-10-13 15:05:55,685]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)>, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>)>
+[2014-10-13 15:05:55,685]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:55,685]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('getSucAndPred', 'CHASE')>
+[2014-10-13 15:05:55,686]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: bank: TFCU
+suc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+pred:('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)
+
+[2014-10-13 15:05:55,686]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)>, None)>
+[2014-10-13 15:05:55,686]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)>, None)>
+[2014-10-13 15:05:55,687]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('getSucAndPred', 'CHASE')>
+[2014-10-13 15:05:55,687]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:55,687]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', None, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>)>
+[2014-10-13 15:05:55,687]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: bank: CHASE
+suc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+pred:None
+
+[2014-10-13 15:05:55,688]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getSucAndPred', None, <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>)>
+[2014-10-13 15:05:55,688]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:55,688]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: bank: CHASE
+suc: None
+pred:('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)
+
+[2014-10-13 15:05:56,678]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:INFO: SENDING TRANSACTION (CLIENT NUM: 1) 
+{'type': 'deposit', 'reqId': None, 'bank': 'TFCU', 'accountNum': 1, 'amount': 100}
+
+[2014-10-13 15:05:56,680]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,680]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,681]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)
+[2014-10-13 15:05:56,681]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:INFO: SENDING TRANSACTION (CLIENT NUM: 2) 
+{'type': 'deposit', 'reqId': None, 'bank': 'TFCU', 'accountNum': 1, 'amount': 100}
+
+[2014-10-13 15:05:56,681]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : TFCU
+[2014-10-13 15:05:56,681]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:INFO: SENDING TRANSACTION (CLIENT NUM: 3) 
+{'type': 'deposit', 'reqId': None, 'bank': 'CHASE', 'accountNum': 1, 'amount': 100}
+
+[2014-10-13 15:05:56,683]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,683]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,683]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:56,683]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,684]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:56,684]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,684]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)
+[2014-10-13 15:05:56,684]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : TFCU
+[2014-10-13 15:05:56,685]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,685]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,686]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)
+[2014-10-13 15:05:56,686]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,686]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:56,686]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.1.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,687]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:56,687]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('getHead', {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:56,686]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.append: [{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,687]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,687]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : CHASE
+[2014-10-13 15:05:56,688]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,688]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,688]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)
+[2014-10-13 15:05:56,688]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:56,689]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)
+[2014-10-13 15:05:56,689]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,689]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'deposit', 'amount': 100, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:56,689]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:56,689]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}
+
+[2014-10-13 15:05:56,690]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.append: [{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,690]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.2.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,690]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.append: [{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}, {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,691]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('deposit', {'amount': 100, 'reqId': '1.3.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,691]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,691]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('deposit', {'amount': 100, 'reqId': '1.3.1', 'accountNum': 1})>
+[2014-10-13 15:05:56,691]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,691]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('deposit', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,692]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,692]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: CHASE SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '1.3.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,692]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}
+
+[2014-10-13 15:05:56,692]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.append: [{'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,692]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:56,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:56,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}
+
+[2014-10-13 15:05:56,693]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)
+[2014-10-13 15:05:56,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.append: [{'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}, {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('deposit', {'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('deposit', {'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,695]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:56,695]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)
+[2014-10-13 15:05:56,695]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1}
+
+[2014-10-13 15:05:56,696]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:56,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.1.1', 'outcome': 'Processed', 'balance': 100, 'accountNum': 1})>
+[2014-10-13 15:05:56,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE sending to pred
+[2014-10-13 15:05:56,696]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.1.1', 'outcome': 'Processed', 'balance': 100, 'accountNum': 1})>
+[2014-10-13 15:05:56,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('deposit', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,697]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 1) {'balance': 100, 'outcome': 'Processed', 'reqId': '0.1.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.pop: [{'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:56,698]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:56,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU SERVER  RECEIVED DEPOSIT
+{'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}
+
+[2014-10-13 15:05:56,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 100, 'reqId': '1.3.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:56,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.1.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,699]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:56,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,700]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.3.1', 'outcome': 'Processed', 'balance': 100, 'accountNum': 1})>
+[2014-10-13 15:05:56,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:56,700]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:56,700]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,700]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.pop: [{'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}]
+[2014-10-13 15:05:56,700]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.3.1', 'outcome': 'Processed', 'balance': 100, 'accountNum': 1})>
+[2014-10-13 15:05:56,701]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:56,701]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:56,701]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.2.1', 'outcome': 'Processed', 'balance': 200, 'accountNum': 1})>
+[2014-10-13 15:05:56,701]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 3) {'balance': 100, 'outcome': 'Processed', 'reqId': '1.3.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,701]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:56,702]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.2.1', 'outcome': 'Processed', 'balance': 200, 'accountNum': 1})>
+[2014-10-13 15:05:56,702]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:56,702]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:56,702]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 2) {'balance': 200, 'outcome': 'Processed', 'reqId': '0.2.1', 'accountNum': 1}
+
+[2014-10-13 15:05:56,703]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,703]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 100, 'reqId': '0.2.1', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:56,703]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:56,704]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:57,684]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:INFO: SENDING TRANSACTION (CLIENT NUM: 1) 
+{'type': 'withdraw', 'reqId': None, 'bank': 'TFCU', 'accountNum': 1, 'amount': 25}
+
+[2014-10-13 15:05:57,685]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:57,685]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:57,686]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)
+[2014-10-13 15:05:57,686]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : TFCU
+[2014-10-13 15:05:57,686]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:INFO: SENDING TRANSACTION (CLIENT NUM: 2) 
+{'type': 'withdraw', 'reqId': None, 'bank': 'CHASE', 'accountNum': 1, 'amount': 25}
+
+[2014-10-13 15:05:57,687]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:57,687]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'TFCU'})>
+[2014-10-13 15:05:57,688]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:57,688]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,687]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:INFO: SENDING TRANSACTION (CLIENT NUM: 3) 
+{'type': 'withdraw', 'reqId': None, 'bank': 'CHASE', 'accountNum': 1, 'amount': 25}
+
+[2014-10-13 15:05:57,688]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,689]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,689]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,689]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <SentEvent time:None to:{<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)>} from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,689]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)
+[2014-10-13 15:05:57,689]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : CHASE
+[2014-10-13 15:05:57,690]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)
+[2014-10-13 15:05:57,690]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: TFCU SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '0.1.2', 'accountNum': 1}
+
+[2014-10-13 15:05:57,690]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,690]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.append: [{'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}]
+[2014-10-13 15:05:57,690]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,691]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:57,691]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('getHead', {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,691]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,692]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,692]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('withdraw', {'amount': 25, 'reqId': '1.2.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,692]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:INFO: Master recieved getHead for : CHASE
+[2014-10-13 15:05:57,693]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)
+[2014-10-13 15:05:57,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> msg:('withdraw', {'amount': 25, 'reqId': '1.2.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}
+
+[2014-10-13 15:05:57,693]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)
+[2014-10-13 15:05:57,694]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,693]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.append: [{'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}]
+[2014-10-13 15:05:57,694]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Master('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)> msg:('getHead', <Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)>, {'type': 'withdraw', 'amount': 25, 'reqId': None, 'accountNum': 1, 'bank': 'CHASE'})>
+[2014-10-13 15:05:57,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: CHASE SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '1.2.2', 'accountNum': 1}
+
+[2014-10-13 15:05:57,694]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.append: [{'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}]
+[2014-10-13 15:05:57,695]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)
+[2014-10-13 15:05:57,695]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,695]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('withdraw', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,695]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('withdraw', {'amount': 25, 'reqId': '1.3.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,695]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('withdraw', {'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,696]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:57,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('withdraw', {'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1}
+
+[2014-10-13 15:05:57,696]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> msg:('withdraw', {'amount': 25, 'reqId': '1.3.2', 'accountNum': 1})>
+[2014-10-13 15:05:57,697]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)
+[2014-10-13 15:05:57,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:57,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}
+
+[2014-10-13 15:05:57,697]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE sending to pred
+[2014-10-13 15:05:57,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('messageFromSuc', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: CHASE SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '1.3.2', 'accountNum': 1}
+
+[2014-10-13 15:05:57,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,698]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.append: [{'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1}, {'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1}]
+[2014-10-13 15:05:57,699]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:57,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:57,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.1.2', 'outcome': 'Processed', 'balance': 175, 'accountNum': 1})>
+[2014-10-13 15:05:57,699]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:INFO: TFCU sending to pred
+[2014-10-13 15:05:57,700]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('withdraw', {'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,700]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)> msg:('response', {'reqId': '0.1.2', 'outcome': 'Processed', 'balance': 175, 'accountNum': 1})>
+[2014-10-13 15:05:57,701]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,701]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:57,701]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)
+[2014-10-13 15:05:57,701]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.2.2', 'outcome': 'Processed', 'balance': 75, 'accountNum': 1})>
+[2014-10-13 15:05:57,701]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 1) {'balance': 175, 'outcome': 'Processed', 'reqId': '0.1.2', 'accountNum': 1}
+
+[2014-10-13 15:05:57,701]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 25, 'reqId': '1.2.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,702]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)> msg:('messageFromSuc', {'amount': 25, 'reqId': '0.1.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,702]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)
+[2014-10-13 15:05:57,702]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)
+[2014-10-13 15:05:57,702]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.2.2', 'outcome': 'Processed', 'balance': 75, 'accountNum': 1})>
+[2014-10-13 15:05:57,702]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.pop: [{'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1}]
+[2014-10-13 15:05:57,702]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:57,703]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:57,703]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> msg:('withdraw', {'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,703]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 2) {'balance': 75, 'outcome': 'Processed', 'reqId': '1.2.2', 'accountNum': 1}
+
+[2014-10-13 15:05:57,703]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE SERVER RECEIVED WITHDRAW
+{'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1}
+
+[2014-10-13 15:05:57,704]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:INFO: CHASE sending to pred
+[2014-10-13 15:05:57,704]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,705]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('messageFromSuc', {'amount': 25, 'reqId': '1.3.2', 'sender': <Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)>, 'accountNum': 1})>
+[2014-10-13 15:05:57,705]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:57,705]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: triggering event <SentEvent time:None to:<Client('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)> from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.3.2', 'outcome': 'Processed', 'balance': 50, 'accountNum': 1})>
+[2014-10-13 15:05:57,705]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:INFO: pendingList.pop: []
+[2014-10-13 15:05:57,705]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: triggering event <ReceivedEvent time:None to:None from:<Server('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)> msg:('response', {'reqId': '1.3.2', 'outcome': 'Processed', 'balance': 50, 'accountNum': 1})>
+[2014-10-13 15:05:57,706]da.api:DEBUG: Unknown proc: ('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)
+[2014-10-13 15:05:57,706]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:INFO: CLIENT RECEIVED: (CLIENT NUM: 3) {'balance': 50, 'outcome': 'Processed', 'reqId': '1.3.2', 'accountNum': 1}
+
+[2014-10-13 15:06:52,791]Master[('adm-129-49-234-243.wi-fi.stonybrook.edu', 17752)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,791]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 24215)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,792]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 16537)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,794]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 31851)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,794]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 35448)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,795]Server[('adm-129-49-234-243.wi-fi.stonybrook.edu', 32861)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,796]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 21263)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,797]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 38777)]:DEBUG: Received KeyboardInterrupt, exiting
+[2014-10-13 15:06:52,797]Client[('adm-129-49-234-243.wi-fi.stonybrook.edu', 15295)]:DEBUG: Received KeyboardInterrupt, exiting
