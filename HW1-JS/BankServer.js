@@ -129,6 +129,7 @@ function normalTransaction(data, response, bankServer) {
 			accounts[data.accountNum] += data.amount;
 			outcome = "Proccessed";
 			bankServer.proccessedTrans[data.reqId] = data;
+			console.log("BS: Adding data to proccessedTrans: " + JSON.stringify(data));
 		}
 		//if withdraw - check if there are enough funds
 		else if(data.type == "withdraw") {
@@ -140,6 +141,7 @@ function normalTransaction(data, response, bankServer) {
 				accounts[data.accountNum] -= data.amount;
 				outcome = "Proccessed";
 				bankServer.proccessedTrans[data.reqId] = data;
+				console.log("BS: Adding data to proccessedTrans: " + JSON.stringify(data));
 			}
 		}
 	}
@@ -172,7 +174,7 @@ function normalTransaction(data, response, bankServer) {
 	}
 	//else we are not the tail, forward the request to the successor
 	else {
-		console.log("Sending to suc: " + JSON.stringify(data));
+		console.log("Sending to suc + adding to pending list: " + JSON.stringify(data));
 		bankServer.pendingList.push(data);
 		sendRequest(bankServer.suc.ip, bankServer.suc.port, data, null);
 	}
