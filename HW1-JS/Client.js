@@ -6,6 +6,8 @@ module.exports = {
 	}
 };
 
+
+//returns a random request type
 Client.prototype.randRequest = function() {
 	var randNum = Math.random();
 	if(randNum < this.random.probGetBalance)
@@ -16,15 +18,19 @@ Client.prototype.randRequest = function() {
 	return "withdraw";
 }
 
+//returns a random bank
 Client.prototype.randBank = function() {
 	var randNum = randomInt(0, this.bankNames.length);
 	return this.bankNames[randNum];
 }
 
+//returns a random int from low inclusice to high exclusive
 function randomInt (low, high) {
     return Math.floor(Math.random() * (high - low) + low);
 }
 
+
+//constructor for Client class
 function Client(port, ip, transactions, randomData, master, bankNames) {
 	//transactions list of {type, accountNum, amount, bank}
 	this.transactions = transactions;
@@ -39,9 +45,11 @@ function Client(port, ip, transactions, randomData, master, bankNames) {
 	//master {ip, port}
 	this.master = master;
 
+	//send all the transactions after i*2 seconds
 	for(var i in transactions)
 		this.sendTransaction(transactions[i], i*2);
 
+	//create the random requests
 	if(this.random) {
 		//create random requests
 		for(var i = 0; i<this.random.numReq; i++) {
@@ -69,6 +77,7 @@ function Client(port, ip, transactions, randomData, master, bankNames) {
 	this.createServer();
 }
 
+//helper for sending transactions - sends to either head or tail
 Client.prototype.sendTransaction = function(transaction, seconds) {
 	if(transaction.type == "deposit" || transaction.type == "withdraw")
 		this.sendTransactionToHead(transaction.bank, transaction.accountNum, transaction.amount, seconds, transaction.type, transaction.reqId);
@@ -79,6 +88,8 @@ Client.prototype.sendTransaction = function(transaction, seconds) {
 Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seconds, type, reqId) {
 	var reqId = reqId? reqId : genReqId(bank, accountNum);
 	var clientServer = this;
+
+	//get the head, on completion send the request
 	this.getHeadFromMaster(bank, function(resObj) {
 		setTimeout(function() {
 			sendRequest(resObj.ip, resObj.port, {
@@ -98,6 +109,8 @@ Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seco
 Client.prototype.sendTransactionToTail = function(bank, accountNum, seconds, type) {
 	var reqId = genReqId(bank, accountNum);
 	var clientServer = this;
+
+	//get the tail, on completion send the request
 	this.getTailFromMaster(bank, function(resObj) {
 		setTimeout(function() {
 			sendRequest(resObj.ip, resObj.port, {
@@ -117,6 +130,8 @@ Client.prototype.sendTransactionToTail = function(bank, accountNum, seconds, typ
 	});
 }
 
+
+//helper for getting head, uses callback
 Client.prototype.getHeadFromMaster = function(bank, callback) {
 	sendRequest(this.master.ip, this.master.port, {
 		'type' : 'getHeadForBank',
@@ -126,6 +141,7 @@ Client.prototype.getHeadFromMaster = function(bank, callback) {
 	});
 }
 
+//helper for getting tail, uses callback
 Client.prototype.getTailFromMaster = function(bank, callback) {
 	sendRequest(this.master.ip, this.master.port, {
 		'type' : 'getTailForBank',
@@ -135,6 +151,7 @@ Client.prototype.getTailFromMaster = function(bank, callback) {
 	});
 }
 
+//helper for sending request to ip - port
 function sendRequest(ip, portNum, reqObj, callback) {
 	var options = {
 		hostname	: ip,
@@ -153,6 +170,7 @@ function sendRequest(ip, portNum, reqObj, callback) {
 	req.end();
 }
 
+//helper for extracting the JSON object from the response
 function getResponseObj(response, callback) {
 	var serverData = '';
 	response.on('data', function(chunk) {
@@ -169,6 +187,7 @@ function handleResponse(response) {
 	getResponseObj(response, null);
 }
 
+//helper for generating request id
 function genReqId(bank, accountNum) {
 	arguments.callee.banks = arguments.callee.banks || [];
 	var allBanks = arguments.callee.banks;
