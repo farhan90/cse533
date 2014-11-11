@@ -49,6 +49,12 @@ function Client(port, ip, transactions, randomData, master, bankNames, clientNum
 	//master {ip, port}
 	this.master = master;
 
+	this.lastHead = null;
+	this.lastTail = null;
+	this.currentTransactionIndex = 0;
+
+	this.responsesRecieved = [];
+
 	this.wstream = null;
 	var clientServer = this;
 	fs.mkdir('./logs',function(e){
@@ -57,9 +63,10 @@ function Client(port, ip, transactions, randomData, master, bankNames, clientNum
 		});
 	});
 
+	sendCurrentTransaction(this);
 	//send all the transactions after i*2 seconds
-	for(var i in transactions)
-		this.sendTransaction(transactions[i], i*2);
+	//for(var i in transactions)
+	//	this.sendTransaction(transactions[i], i*2);
 
 	//create the random requests
 	if(this.random) {
@@ -89,6 +96,21 @@ function Client(port, ip, transactions, randomData, master, bankNames, clientNum
 	this.createServer();
 }
 
+function sendCurrentTransaction(clientServer) {
+	if(clientServer.currentTransactionIndex < clientServer.transactions.length) {
+		var indexSent = clientServer.currentTransactionIndex;
+		var trans = clientServer.transactions[clientServer.currentTransactionIndex];
+		clientServer.sendTransaction(trans, 2);
+		setTimeout(function() {
+			if(indexSent == clientServer.currentTransactionIndex) {
+				//we timed out and still waiting on this :( -> RESEND IT
+				log("Time out occurred for seqNum: " + indexSent, clientServer);
+				sendCurrentTransaction(clientServer);
+			}
+		}, 1000 * 12);
+	}
+}
+
 //helper for sending transactions - sends to either head or tail
 Client.prototype.sendTransaction = function(transaction, seconds) {
 	if(transaction.type == "deposit" || transaction.type == "withdraw")
@@ -104,6 +126,10 @@ Client.prototype.sendTransactionToHead = function(bank, accountNum, amount, seco
 	//get the head, on completion send the request
 	setTimeout(function() {
 		clientServer.getHeadFromMaster(bank, function(resObj) {
+			if(JSON.stringify(clientServer.lastHead) != JSON.stringify(resObj)) {
+				clientServer.lastHead = resObj;
+				log("New Head detected: " + JSON.stringify(resObj),clientServer);
+			}
 			sendRequest(resObj.ip, resObj.port, {
 				reqId 	: reqId,
 				type 	: type,
@@ -125,6 +151,10 @@ Client.prototype.sendTransactionToTail = function(bank, accountNum, seconds, typ
 	//get the tail, on completion send the request
 	setTimeout(function() {
 		clientServer.getTailFromMaster(bank, function(resObj) {
+			if(JSON.stringify(clientServer.lastTail) != JSON.stringify(resObj)) {
+				clientServer.lastTail = resObj;
+				log("New Tail detected: " + JSON.stringify(resObj),clientServer);
+			}
 			sendRequest(resObj.ip, resObj.port, {
 				reqId 	: reqId,
 				type 	: type,
@@ -136,6 +166,8 @@ Client.prototype.sendTransactionToTail = function(bank, accountNum, seconds, typ
 			}, function(response) {
 				getResponseObj(response, function(resObj) {
 					log("Get Balance Response from tail: " + JSON.stringify(resObj), clientServer);
+					clientServer.currentTransactionIndex++;
+					sendCurrentTransaction(clientServer);
 				});
 			}, clientServer);
 		}, clientServer);
@@ -211,7 +243,7 @@ Client.prototype.genReqId = function(bank) {
 		allBanks.push(bank);
 	var bnkNum = allBanks.indexOf(bank);
 
-	var reqId = bnkNum + "."  + this.clientNum + "." + this.reqCount++;
+	var reqId = bnkNum + "."  + this.clientNum + "." + this.currentTransactionIndex;
 	return reqId;
 }
 
@@ -235,12 +267,28 @@ Client.prototype.createServer = function() {
 }
 
 function recieved(data, response, clientServer) {
-	log("\n\nCLIENT RECIEVED: " + JSON.stringify(data) + "\n\n", clientServer);
+	delete data.client;
+	var found = false;
+	for(var i in clientServer.responsesRecieved) {
+		var res = clientServer.responsesRecieved[i];
+		if(JSON.stringify(res) === JSON.stringify(data))
+			found = true;
+	}
+	if(found)
+		log("CLIENT RECIEVED DUPLICATE: " + JSON.stringify(data) + "\n\n", clientServer);
+	else {
+		log("CLIENT RECIEVED: " + JSON.stringify(data) + "\n\n", clientServer);
+		clientServer.responsesRecieved.push(data);
+	}
+	clientServer.currentTransactionIndex++;
+	sendCurrentTransaction(clientServer);
 }
 
 //#pragma mark - logging
 
 function log(text, client) {
+	var d = new Date().getTime();
+	text = JSON.stringify(d) + ': ' + client.clientNum + ': ' + text;
 	console.log(text);
 
 	if(client.wstream != null) {

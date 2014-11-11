@@ -7,10 +7,13 @@ var config = ''
 process.argv.forEach(function (val, index, array) {
 	console.log(index + ': ' + val);
 	if(index == 2)
-		config = './' + val;
+		config = val;
 });
 if(config == '') 
-	config = './config.json';
+	config = './ConfigFiles/config.json';
+else
+	config = './ConfigFiles/' + config;
+
 config = require(config);
 
 //pragma mark - setup banks

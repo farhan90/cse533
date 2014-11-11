@@ -59,6 +59,13 @@ function Master(banks, port, ip) {
 	this.oldState = JSON.parse(JSON.stringify(this.currentState));
 
 	var master = this;
+	this.wstream = null;
+	fs.mkdir('./logs',function(e){
+		fs.mkdir('./logs/master',function(e){
+			master.wstream = fs.createWriteStream('./logs/master/master.log');
+		});
+	});
+
 	setInterval(function() {
 		checkForFailuresAndAditions(master);
 	}, 5000);
@@ -68,7 +75,7 @@ function Master(banks, port, ip) {
 }
 
 Master.prototype.createServer = function() {
-	console.log("Master attempting to listen on: " + this.port);
+	log("Master attempting to listen on: " + this.port, this);
 	var master = this;
 
 	http.createServer(function(request, response) {
@@ -126,20 +133,18 @@ function succForNode(bank, node, master) {
 }
 
 function checkForFailuresAndAditions(master) {
-	console.log("\n\nCHECKING FOR FAILURES");
+	log("CHECKING FOR FAILURES", master);
 	var oldState = JSON.parse(JSON.stringify(master.oldState));
 	master.oldState = JSON.parse(JSON.stringify(master.currentState));
 
 	if(JSON.stringify(master.currentState) != JSON.stringify(oldState)) {
 		var ignore = false;
 		for(var bank in master.currentState) {
-			console.log('deb: ' + bank + ' ' + JSON.stringify(master.currentState[bank]));
 			var len = 0;
 			for(k in master.currentState[bank]) len++;
 			for(var i = len-1; i>=0; i--) {
 				var node = master.orderCameOnline[bank][i];
 				var alive = master.currentState[bank][node];
-				console.log('deb: ' + node + ', alive: ' + alive);
 				if(alive == 0 && oldState[bank][node] == 1) {
 					//this node has failed
 					//no need to notiy this node
@@ -151,10 +156,11 @@ function checkForFailuresAndAditions(master) {
 						//send oldTailCrash to joiner
 						var joiner = master.joiningTails[bank];
 						var joinerNode = getNodeFor(bank, joiner.port, master);
-						sendRequest(joinerNode.ip, joinerNode.port, {"type":"oldTailCrash"}, null);
+						sendRequest(joinerNode.ip, joinerNode.port, {"type":"oldTailCrash"}, null, master);
 						master.currentState[bank][joiner.port] = 0;
 						master.oldState[bank][joiner.port] = 0;
 						master.joiningTails[bank] = null;
+						log("Informing the joinging tail the current tail crashed", master);
 					}
 				}
 				else if(alive == 1 && oldState[bank][node] == 0) {
@@ -166,22 +172,22 @@ function checkForFailuresAndAditions(master) {
 					var newSucc = succForNode(bank, node, master);
 
 					var bankNode = getNodeFor(bank, node, master);
-					console.log("Sending failure detected");
+					log("Sending failure detected", master);
 					sendRequest(bankNode.ip, bankNode.port, {
 						"type" : "NewPredSuccCrash",
 						"newPred" : newPred,
 						"newSucc" : newSucc 
-					}, null);
+					}, null, master);
 				}
 				else if(alive == 0 && oldState[bank][node] == 2) {
 					//this guys was joining and failed -> inform the old tail
-					console.log("Joining Node Crashed: Informing old tail of crash");
+					log("Joining Node Crashed: Informing old tail of crash", master);
 					var tailToNotify = master.lastTails[bank];
 					sendRequest(tailToNotify.ip, tailToNotify.port, {
 						"type" : "YouveGotAFriend",
 						"port" : -1,
 						"ip" : "-1" 
-					}, null);
+					}, null, master);
 					master.joiningTails[bank] = null;
 					master.lastTails[bank] = null;
 
@@ -222,7 +228,7 @@ function recieved(data, response, master) {
 }
 
 function handleNewTailReady(ip, port, bank, master) {
-	console.log("Master informed of new tail for " + bank);
+	log("Master informed of new tail for " + bank, master);
 	if(master.oldState[bank][port] == 2)
 		master.oldState[bank][port] = 1;
 	if(master.currentState[bank][port] == 2)
@@ -239,11 +245,12 @@ function handleAliveMessage(bank, pk, master) {
 	if(master.oldState[bank][pk] == 0 && master.joiningTails[bank] != null && otherNodeIsJoining) {
 		//someone else is already joining. We will be pinged later with this bank/port combo, when the other node has finished joining we will let this join
 		master.currentState[bank][pk] = 0;
-		console.log(JSON.stringify(master.oldState));
+		log('someone else already joining, we will ignore this nodes join request', master);
 	}
 	else if(master.oldState[bank][pk] == 0 || (master.joiningTails[bank] != null && bank == master.joiningTails[bank].bank && pk == master.joiningTails[bank].port)) {
 		
 		if(master.joiningTails[bank] == null) {
+			log('New node came online, informing current tail', master);
 			master.orderCameOnline[bank].push(pk);
 			master.joiningTails[bank] = {
 				'bank'  : bank,
@@ -259,9 +266,7 @@ function handleAliveMessage(bank, pk, master) {
 					"type" : "YouveGotAFriend",
 					"port" : node.port,
 					"ip"   : node.ip
-				}, null);
-			else
-				console.log("SHOULD NOT HAPPEN - NODE LENGTH 0");
+				}, null, master);
 		}
 		// # > 1 means not ready to be tail but in queue of doing so
 		master.oldState[bank][pk] = 2;
@@ -273,11 +278,13 @@ getSucAndPred = function(bank, port, ip, response, master) {
 	suc = succForNode(bank, port, master);
 	pred = predForNode(bank, port, master);
 
-	response.writeHead(200);
-	response.end(JSON.stringify({
+	var ret = JSON.stringify({
 		'suc' 	: suc,
 		'pred' 	: pred
-	}));
+	});
+	log("Sending: " + ret, master);
+	response.writeHead(200);
+	response.end(ret);
 }
 
 function getNodeFor(bank, port, master) {
@@ -338,14 +345,14 @@ getTail = function(bank, response, master) {
 //#pragma mark - magic send method
 
 //helper for sending request to ip - port
-function sendRequest(ip, portNum, reqObj, callback) {
+function sendRequest(ip, portNum, reqObj, callback, master) {
 	var options = {
 		hostname	: ip,
 		port		: portNum,
 		method 		: 'POST',
 		path 		: '/'
 	};
-
+	log('sending: ' + JSON.stringify(reqObj), master);
 	var req = http.request(options, (callback != null)? callback : handleResponse);
 	var reqText = JSON.stringify(reqObj);
 	req.write(reqText);
@@ -380,4 +387,17 @@ function portAndBankCheck(s1, s2) {
 		return s1.port == s2.port && s1.bank == s2.bank;
 	else
 		return false;
+}
+
+//#pragma mark - logging
+
+function log(text, master) {
+	var d = new Date().getTime();
+	text = JSON.stringify(d) + ': ' + text;
+	console.log(text);
+
+	if(master.wstream != null) {
+		master.wstream.write(text);
+		master.wstream.write('\n\n');
+	}
 }

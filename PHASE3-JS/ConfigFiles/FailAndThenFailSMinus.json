@@ -1,5 +1,5 @@
 {
-	"comment" : "Showing that depositing into same numbered accounts on different banks do not effect each other",
+	"comment" : "shows failure of node, then as recovery is happening, failure of S-",
 	"master" : {
 		"ip" : "127.0.0.1",
 		"port" : 8023
@@ -19,38 +19,19 @@
 				{
 					"port" 	: 5611,
 					"ip"	: "127.0.0.1",
-					"startTime"	: 2,
-					"numSent"	: -1,
-					"numRecv"	: 1
+					"startTime"	: 0,
+					"numSent"	: 3,
+					"numRecv"	: -1
 				},
 				{
 					"port" 	: 5612,
 					"ip"	: "127.0.0.1",
 					"startTime"	: 0,
 					"numSent"	: -1,
-					"numRecv"	: -1
-				}
-			]
-		},
-		{
-			"name" 	: "CHASE",
-			"nodes"	: [
-				{
-					"port" 	: 5620,
-					"ip"	: "127.0.0.1",
-					"startTime"	: 0,
-					"numSent"	: -1,
-					"numRecv"	: -1
+					"numRecv"	: 5
 				},
 				{
-					"port" 	: 5621,
-					"ip"	: "127.0.0.1",
-					"startTime"	: 2,
-					"numSent"	: -1,
-					"numRecv"	: -1
-				},
-				{
-					"port" 	: 5622,
+					"port" 	: 5613,
 					"ip"	: "127.0.0.1",
 					"startTime"	: 0,
 					"numSent"	: -1,
@@ -75,7 +56,7 @@
 					"type" 		: "withdraw",
 					"accountNum": 1,
 					"amount"	: 25,
-					"bank"		: "CHASE",
+					"bank"		: "TFCU",
 					"reqId"		: "6.6.6"
 				},
 				{
@@ -93,7 +74,7 @@
 					"type" 		: "deposit",
 					"accountNum": 1,
 					"amount"	: 100,
-					"bank"		: "CHASE",
+					"bank"		: "TFCU",
 					"reqId"		: "5.5.5"
 				},
 				{
@@ -120,6 +101,12 @@
 				{
 					"type" 		: "getBalance",
 					"accountNum": 1,
+					"bank"		: "TFCU"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 10,
 					"bank"		: "TFCU"
 				}
 			]	

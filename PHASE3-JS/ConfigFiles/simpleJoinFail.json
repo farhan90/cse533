@@ -1,5 +1,5 @@
 {
-	"comment" : "This config shows deposit, withdraw, failed withdraw, and getBalance all one one account. It also shows how to manually set the reqId, the two last transactions share a reqId w/ the first transaction. One will produce an outcome of Processed the other InconsistentHistory",
+	"comment" : "shows a simple join and join failure",
 	"master" : {
 		"ip" : "127.0.0.1",
 		"port" : 8023
@@ -99,28 +99,7 @@
 				{
 					"type" 		: "withdraw",
 					"accountNum": 1,
-					"amount"	: 25,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "getBalance",
-					"accountNum": 1,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "getBalance",
-					"accountNum": 1,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "getBalance",
-					"accountNum": 1,
-					"bank"		: "TFCU"
-				},
-				{
-					"type" 		: "withdraw",
-					"accountNum": 1,
-					"amount"	: 25,
+					"amount"	: 10,
 					"bank"		: "TFCU"
 				}
 			]	

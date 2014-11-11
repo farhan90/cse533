@@ -154,13 +154,14 @@ function sendDataToNewTail(data, bankServer, httpServer) {
 		}, null, bankServer, httpServer);
 
 		if(bankServer.newNodeJoining == false) return;
-		bankServer.newNodeJoining = false;
 		bankServer.suc = {
 			'ip' : data.ip,
 			'port' : data.port
 		};
-		if(bankServer.alive)
+		if(bankServer.alive) {
 			log("I finished sending data to the new tail: " + JSON.stringify(data), bankServer);
+			bankServer.newNodeJoining = false;
+		}
 	}, 1000*3);
 }
 
@@ -205,14 +206,16 @@ function recieved(data, response, bankServer, httpServer) {
 		response.end();
 	}
 	else if(data.type == "endOfSent") {
-		log("Joining node ready - informing master + bank = " + bankServer.bank, bankServer);
-		bankServer.imJoining = false;
-		sendRequest(bankServer.master.ip, bankServer.master.port, {
-			"type": "NewTailReady",
-			"ip"  : bankServer.ip,
-			"port" : bankServer.port,
-			"bank" : bankServer.bank
- 		}, null, bankServer, httpServer);
+		if(bankServer.alive) {
+			log("Joining node ready - informing master + bank = " + bankServer.bank, bankServer);
+			bankServer.imJoining = false;
+			sendRequest(bankServer.master.ip, bankServer.master.port, {
+				"type": "NewTailReady",
+				"ip"  : bankServer.ip,
+				"port" : bankServer.port,
+				"bank" : bankServer.bank
+	 		}, null, bankServer, httpServer);
+		}
 		response.end();
 	}
 	else if(data.type == "NewPredSuccCrash") {
@@ -226,10 +229,9 @@ function recieved(data, response, bankServer, httpServer) {
 
 		if(newSuc == null || portAndIPCheck(oldSuc, newSuc) == false) {
 			if(newSuc == null) {
-				log("BS: Detected Failure from Master, I am the tail, awaiting fin...", bankServer);
+				log("BS: Detected Failure from Master, I am the tail.", bankServer);
 				//send pending list to client and replys back to pred
 				sendPendingListToClient(bankServer, httpServer);
-				log("Finished...", bankServer)
 			}
 			else {
 				log("BS: Detected Failure from Master, New Suc is: " + JSON.stringify(newSuc), bankServer);
@@ -395,14 +397,20 @@ function normalTransaction(data, response, bankServer, httpServer) {
 		}
 		else {
 			//I AM THE TAIL - EITHER SEND TO CLIENT OR ADD TO PENDING LIST
-
-			if(bankServer.newNodeJoining == false)
-				if(bankServer.pred != null)
+			if(bankServer.newNodeJoining == false) {
+				if(bankServer.pred != null) {
 					sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
+					log("Sending ACK back to pred", bankServer);
+				}
+			}
 			else if(bankServer.newNodeJoining) {
 				log("New tail is joining so adding to pending list: " + JSON.stringify(data), bankServer);
 				bankServer.pendingList.push(data);	
 			}
+
+			log('Sending to client: ' + JSON.stringify(resObj), bankServer);
+			sendRequest(data.client.ip, data.client.port, resObj, null, bankServer, httpServer);
+
 			resObj['client'] = data.client;
 			bankServer.responses[data.order] = resObj;
 		}
@@ -507,6 +515,8 @@ function handleResponse(response) {
 //#pragma mark - logging
 
 function log(text, bankServer) {
+	var d = new Date().getTime();
+	text = JSON.stringify(d) + ': ' + bankServer.port + ': ' + text;
 	console.log(text);
 
 	if(bankServer.wstream != null) {
