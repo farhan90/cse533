@@ -1,0 +1,75 @@
+{
+
+	"banks" : [
+		{
+			"name" 	: "TFCU",
+			"nodes"	: [
+				{
+					"startTime":0,
+					"numSend" : -1,
+					"numRecv" :-1
+
+				},
+				{
+					"startTime":0,
+					"numSend" : -1,
+					"numRecv" :-1
+
+				},
+				{
+					"startTime":0,
+					"numSend" : -1,
+					"numRecv" :-1
+
+				},
+				{
+					"startTime":0,
+					"numSend" : 10,
+					"numRecv" :-1
+
+				}
+
+			]
+			
+		}
+			
+	],
+	"clients" : [
+		{
+		"transactions" 	: [
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 100,
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5",
+					"timeout"	: 0
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 50,
+					"bank"		: "TFCU",
+					"reqId"		: "0.1.1",
+					"timeout"	: 5
+				},
+				{
+					"type" 		: "getBalance",
+					"accountNum": 1,
+					"bank"		: "TFCU",
+					"timeout"	: 20
+				},
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 50,
+					"bank"		: "TFCU",
+					"reqId"		: "0.1.1",
+					"timeout"	: 5
+				}
+
+				
+			]	
+		}
+	]
+}

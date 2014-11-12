@@ -1,109 +1,138 @@
 import sys
 import random
+import logging
+import time
 
 '''This is a client process
 handles all the client transactions'''
 
 class Client(process):
-    def setup(master, clientNum,transList,randomReq,bankNames):
-        self.reqCount = 0
-        
+	def setup(master, clientNum,transList,randomReq,bankNames):
+		setup_logfile('client'+str(clientNum)+'.log')
+		self.reqCount = 0
+		self.curr_trans=0
+		self.curr_reqId=None
 
-    def main():
-        
-        if(transList!=None):
-            for i in range(len(transList)):
-                transaction={}
-                transaction['accountNum']=transList[i]['accountNum']
-                transaction['type']=transList[i]['type']
-                transaction['amount']=transList[i].get('amount',0)
-                transaction['bank']=transList[i]['bank']
-                transaction['reqId']=transList[i].get('reqId',None)
-                timeout=transList[i].get('timeout',1)
-                sendTransaction(transaction,timeout)
+	def main():
+		
+		if(transList!=None):
+			while True:
+				if await(False):pass
+				elif timeout(1):
+					if self.curr_trans <len(transList):
+						transaction={}
+						transaction['accountNum']=transList[self.curr_trans]['accountNum']
+						transaction['type']=transList[self.curr_trans]['type']
+						transaction['amount']=transList[self.curr_trans].get('amount',0)
+						transaction['bank']=transList[self.curr_trans]['bank']
+						timeout=transList[self.curr_trans].get('timeout',1)
+						reqId=transList[self.curr_trans].get('reqId',None)
+						prob=transList[self.curr_trans].get('prob',0)
+						rand_prob=random.randint(0,1)
 
-        if randomReq!=None:
-            random.seed(randomReq["seed"])
-            output("GENERATING RANDOM REQUEST")
-            for i in range(randomReq["numReq"]):      
-                transaction=getRandomTransaction() 
-                sendTransaction(transaction,i*2)  
+						if(prob!=0 and prob>=rand_prob):
+							output("Packet dopped")
+						
+						else:
+							if reqId == None:
+								reqId = genReqId(transaction['bank'])
+							transaction['reqId'] = reqId
+							self.curr_reqId=reqId
+							sendTransaction(transaction,timeout)
+							output("The current index is "+str(self.curr_trans))
+							time.sleep(2)
 
-        
-        await(False)
+		if randomReq!=None:
+			random.seed(randomReq["seed"])
+			output("GENERATING RANDOM REQUEST")
+			for i in range(randomReq["numReq"]):      
+				transaction=getRandomTransaction() 
+				sendTransaction(transaction,i*2)  
 
+		
+		await(False)
 
-    """Method for generating a random request"""    
-    def getRandomTransaction():
-        index=random.randint(0,len(bankNames)-1) #inclusive 
-        bank=bankNames[index]
-        reqType=getRandomReqType()
-        amount=random.randint(0,100)
-        accountNum=random.randint(0,10)
-        transaction={
-            'accountNum' : accountNum,
-            'type' : reqType,
-            'amount' : amount,
-            'bank' : bank
-        }
-        return transaction
+	def setup_logfile(filename):
+		rootlog = logging.getLogger('')
+		filelvl = logging.INFO
+		fh = logging.FileHandler(filename)
+		formatter = logging.Formatter('[%(asctime)s]%(name)s: %(message)s')
+		fh.setFormatter(formatter)
+		fh.setLevel(filelvl)
+		rootlog._filelvl = filelvl
+		rootlog.addHandler(fh)
 
-    def getRandomReqType():
-        randNum=random.random()
-        if randNum<randomReq['probGetBalance'] or randomReq['probWithdraw']+randomReq['probDeposit']<randNum:
-            return "getBalance"
-        if randNum<randomReq['probWithdraw'] or randomReq['probGetBalance']+randomReq['probDeposit']<randNum:
-            return "withdraw"
-    
-        return "deposit"
-        
+	"""Method for generating a random request"""    
+	def getRandomTransaction():
+		index=random.randint(0,len(bankNames)-1) #inclusive 
+		bank=bankNames[index]
+		reqType=getRandomReqType()
+		amount=random.randint(0,100)
+		accountNum=random.randint(0,10)
+		transaction={
+			'accountNum' : accountNum,
+			'type' : reqType,
+			'amount' : amount,
+			'bank' : bank
+		}
+		return transaction
 
-    '''A helper method to send transaction depending on the
-    type of transaction'''
+	def getRandomReqType():
+		randNum=random.random()
+		if randNum<randomReq['probGetBalance'] or randomReq['probWithdraw']+randomReq['probDeposit']<randNum:
+			return "getBalance"
+		if randNum<randomReq['probWithdraw'] or randomReq['probGetBalance']+randomReq['probDeposit']<randNum:
+			return "withdraw"
+	
+		return "deposit"
+		
 
-    def sendTransaction(transaction, time):
+	'''A helper method to send transaction depending on the
+	type of transaction'''
 
-        if await(False): pass
-        elif timeout(time): 
-            output("SENDING TRANSACTION (CLIENT NUM: "+str(clientNum)+") \n"+str(transaction)+"\n");
-            if transaction['type'] == 'getBalance':
-                getTail(transaction)
-            else:
-                getHead(transaction)
-    
+	def sendTransaction(transaction, time):
 
-    '''Handler functions for send and receiving messages'''
+		if await(False): pass
+		elif timeout(time): 
+			output("SENDING TRANSACTION (CLIENT NUM: "+str(clientNum)+") \n"+str(transaction)+"\n");
+			if transaction['type'] == 'getBalance':
+				getTail(transaction)
+			else:
+				getHead(transaction)
+	
 
-    def getTail(transaction):
-        send(('getTail', transaction), to=master)
-    
-    def receive(msg=('getTail',tail, transaction), from_=p):
-        reqId = transaction.get('reqId', None)
-        if reqId == None:
-            reqId = genReqId(transaction['bank'])
-        transaction['reqId'] = reqId
-        send(('getBalance', transaction), to=tail)
+	'''Handler functions for send and receiving messages'''
 
-    def getHead(transaction):
-        send(('getHead',transaction), to=master)
+	def getTail(transaction):
+		send(('getTail', transaction), to=master)
+	
+	def receive(msg=('getTail',tail, transaction), from_=p):
+		reqId = transaction.get('reqId')
+		send(('getBalance', transaction), to=tail)
 
-    def receive(msg=('getHead',head, transaction), from_=p):
-        reqId = transaction.get('reqId', None)
-        if reqId == None:
-            reqId = genReqId(transaction['bank'])
-        sendToServer(transaction['type'], transaction['accountNum'], transaction['amount'], transaction['bank'], reqId, head)
+	def getHead(transaction):
+		send(('getHead',transaction), to=master)
 
-    def sendToServer(type, accountNum, amount, bank, reqId, head):
-        send((type, {
-            'reqId' : reqId,
-            'accountNum' : accountNum,
-            'amount' : amount
-        }), to=head)
+	def receive(msg=('getHead',head, transaction), from_=p):
+		reqId = transaction.get('reqId')
+		output("Received head "+str(head)+ " from Master for bank "+ transaction['bank'])
+		sendToServer(transaction['type'], transaction['accountNum'], transaction['amount'], transaction['bank'], reqId, head)
 
-    def receive(msg=('response',message), from_=p):
-        output("CLIENT RECEIVED: (CLIENT NUM: "+str(clientNum)+") " + str(message)+"\n")
+	def sendToServer(type, accountNum, amount, bank, reqId, head):
+		send((type, {
+			'reqId' : reqId,
+			'accountNum' : accountNum,
+			'type':type,
+			'amount' : amount
+		}), to=head)
 
-    def genReqId(bank):
-        index = bankNames.index(bank)
-        reqCount += 1
-        return (str(index) + "." + str(clientNum) + "." + str(reqCount))
+	def receive(msg=('response',message), from_=p):
+		if message['reqId']==self.curr_reqId:
+			self.curr_trans=self.curr_trans+1
+			self.curr_reqId=None
+		output("CLIENT RECEIVED: (CLIENT NUM: "+str(clientNum)+") " + str(message)+"\n")
+
+	def genReqId(bank):
+		index = bankNames.index(bank)
+		reqCount += 1
+		return (str(index) + "." + str(clientNum) + "." + str(reqCount))

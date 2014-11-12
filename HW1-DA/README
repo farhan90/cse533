@@ -33,8 +33,21 @@ NOTES:
 The config.json file contains test cases to test for deposit,withdraw and get balance
 it also tests for Insufficient funds and inconsistent with history errors
 
-The config_random.json file generates random requests to the servers
+There are multiple config files to test for each specific test cases in the grading sheet.
 
-The config_multiple_clients.json tests deposit and withdraw transaction
-by multiple clients.
+config_head_fails.json tests for head and tail failing at the same time and also simulates message loss
+on the client
+
+config_new_node_fails.json tests for chain extension and failing of the new node during chain extension
+
+config_old_tail_fails.json tests for chain extension and failure of the old tail during the chain extension
+
+config_one_fails.json tests for any one node failing in the chain
+
+config_pred_fails.json tests for any one node failing and then soon its predecessor also failing
+
+config_suc_fails.json tests for any one failing and then soon its successor also failing
+
+config_tail_fails.json tests for the tail of a chain failing
+
 

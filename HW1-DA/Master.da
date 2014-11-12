@@ -1,30 +1,190 @@
 import sys
+import logging
 
 '''The master class, it's responsible to serving request for the head and tail
 servers of a bank. It also tells each server it's successor and predecessor'''
 
 class Master(process):
-    def setup(servers): pass
+	def setup(servers): 
+		setup_logfile('master.log')
+		self.newServerList={}
+		self.oldServerList={}
+		self.nodePreds={}
+		self.nodeSucs={}
 
-    def main():
-        await(False)
+	def main():
+		letAllServersKnow()
+		while True:
+			if await(False):pass
+			elif timeout(5):
+				output("Doing an is alive check")
+				checkWhoIsAlive()
 
-    def receive(msg=('getTail', transaction), from_=p):
-    	output("Master recieved getTail for : " + transaction['bank'])
-    	send(('getTail', servers[transaction['bank']][len(servers[transaction['bank']])-1], transaction), to=p)
 
-    def receive(msg=('getHead', transaction), from_=p):
-    	output("Master recieved getHead for : " + transaction['bank'])
-    	send(('getHead', servers[transaction['bank']][0], transaction), to=p)
+	def checkWhoIsAlive():
+		toDelete=[]
+		output("Old and new list"+str(len(self.oldServerList))+"\n"+str(len(self.newServerList)))
+		if self.oldServerList!=self.newServerList:
+			'''Someone crashed'''
+			
+			for key in self.newServerList:
+				if self.newServerList[key]['alive']==0:
+						output("MASTER detected a crash")
+						if key in self.oldServerList:
+							self.oldServerList[key]['alive']=0
+						output("SERVER "+self.newServerList[key]['sId']+" crashed")
+						handleCrash(key,self.newServerList[key]['sId'])
+						toDelete.append(key)
+			
 
-    def receive(msg=('getSucAndPred', bank), from_=p):
-    	index = servers[bank].index(p)
-    	pred = None
-    	suc = None
 
-    	if (index+1) < len(servers[bank]):
-    		suc = servers[bank][index+1]    	
-    	if index > 0:
-    		pred = servers[bank][index-1]
 
-    	send(('getSucAndPred', suc, pred), to=p)
+		for key in toDelete:
+			self.newServerList.pop(key)
+			self.oldServerList.pop(key)
+
+		for key in self.newServerList:
+			if key in self.oldServerList:
+				self.oldServerList[key]['alive']=self.newServerList[key]['alive']
+			else:
+				self.oldServerList[key]={'alive':self.newServerList[key]['alive'],'sId':self.newServerList[key]['alive']}
+			self.newServerList[key]['alive']=0
+
+
+	def handleCrash(node,sId):
+		bank=sId.split(".")[0]
+
+		index=getIndex(node,bank)
+		output("The index is "+str(index))
+		suc=getNewSuc(index,bank)
+		pred=getNewPred(index,bank)
+		
+
+		if suc != None:
+			sucIndex=getIndex(suc,bank)
+			succNewSucc=getNewSuc(sucIndex,bank)
+			send(('OnFailureMessage',succNewSucc,pred),to=suc)
+
+		if pred != None	:
+			predIndex=getIndex(pred,bank)
+			predNewPred=getNewPred(predIndex,bank)
+			send(('OnFailureMessage',suc,predNewPred),to=pred)
+
+	
+	'''Setting up log file'''
+	def setup_logfile(filename):
+		rootlog = logging.getLogger('')
+		filelvl = logging.INFO
+		fh = logging.FileHandler(filename)
+		formatter = logging.Formatter('[%(asctime)s]%(name)s: %(message)s')
+		fh.setFormatter(formatter)
+		fh.setLevel(filelvl)
+		rootlog._filelvl = filelvl
+		rootlog.addHandler(fh)
+
+	def letAllServersKnow():
+		for key in servers:
+			bankServers=servers[key]
+			for bankServer in bankServers:
+				send(("PingFromMaster"),to=bankServer["server"])
+
+				'''We know the server has started and assume its alive'''
+				if bankServer["startTime"]==0:
+					self.oldServerList[bankServer['server']]={'alive':1,'sId':bankServer['sId']}
+					self.newServerList[bankServer['server']]={'alive':1,'sId':bankServer['sId']}
+
+
+	def receive(msg=('getTail', transaction), from_=p):
+		output("Master recieved getTail for : " + transaction['bank'])
+		tail=getTail(transaction['bank'])
+		send(('getTail', tail, transaction), to=p)
+
+	def receive(msg=('getHead', transaction), from_=p):
+		output("Master recieved getHead for : " + transaction['bank'])
+		head=getHead(transaction['bank'])
+		send(('getHead', head, transaction), to=p)
+
+	def receive(msg=('PingToMaster',serverId),from_=p):
+		#output("MASTER recieved ping from "+serverId)
+		if p in self.newServerList:
+			output("Changing alive status of "+serverId)
+			self.newServerList[p]['alive']=1
+	
+	def receive(msg=('AddToChain',bank,serverId),from_=p):
+		tail=getTail(bank)
+		output("MASTER Received a request to extend chain from server "+serverId)
+		send(('YouGotABud',p),to=tail)
+
+
+	def receive(msg=('NewTailReady',bank,serverId,oldTail), from_=p):
+		output("The new tail for "+bank+" is "+serverId)
+		index=getIndex(oldTail,bank)
+		oldTailPred=getNewPred(index,bank)	
+		send(('getSucAndPred',p,oldTailPred),to=oldTail)
+		output("SENT TO THE OLD TAIL,index "+str(index))
+		send(('getSucAndPred',None,oldTail),to=p)
+		output("SENT TO THE NEW TAIL,index "+str(index))
+		send(("YouAreNewTail"),to=p)
+		self.newServerList[p]={'alive':1,'sId':serverId}
+
+	def getHead(bank):	
+		for i in range(len(servers[bank])):
+			isHead=servers[bank][i]['server']
+			if isHead in self.oldServerList and self.oldServerList[isHead]['alive']==1:
+				return isHead
+
+
+	def getTail(bank):
+		for i in range(len(servers[bank])-1,-1,-1):
+			isTail=servers[bank][i]["server"]
+			if isTail in self.oldServerList and self.oldServerList[isTail]["alive"]==1:
+				return isTail
+
+	def getIndex(node,bank):
+		index=0
+		for nodes in servers[bank]:
+			if(nodes["server"]==node):
+				break
+			else:
+				index=index+1
+		return index		
+
+
+	def getNewSuc(index,bank):
+		newSuc=None
+		for i in range(index+1,len(servers[bank])):
+			isSuc=servers[bank][i]["server"]
+			if isSuc in self.newServerList:
+				if(self.oldServerList[isSuc]["alive"]==1):
+					newSuc=isSuc
+					break
+		return newSuc
+
+	def getNewPred(index,bank):
+		newPred=None
+		for i in range(index-1,-1,-1):
+			isPred=servers[bank][i]["server"]
+			if isPred in self.newServerList:
+				if(self.oldServerList[isPred]["alive"]==1):
+					newPred=isPred
+					break
+		return newPred
+
+	def receive(msg=('getSucAndPred', bank,serverId), from_=p):
+		pred=None
+		suc=None
+		index=getIndex(p,bank)
+
+		for i in range(index+1,len(servers[bank])):
+			if servers[bank][i]["startTime"]==0:
+				suc=servers[bank][i]["server"]
+				break
+
+
+		for i in range(index-1,-1,-1):
+			if servers[bank][i]["startTime"]==0:
+				pred=servers[bank][i]["server"]
+				break
+
+		send(('getSucAndPred', suc, pred), to=p)
+		

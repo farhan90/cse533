@@ -1,116 +1,289 @@
 import sys
+import logging
+import time
 
 '''This is the server class which handles requests from clients
 and master'''
 
 class Server(process):
-    def setup(master, bank):
-    	self.accounts = {}
-    	self.suc = None
-    	self.pred = None
-    	self.pendingList = []
-    	self.proccessedTrans = {}
+	def setup(serverId,startTime,numSend,numRecv,bank):
+		setup_logfile(serverId+'.log')
+		self.accounts = {}
+		self.suc = None
+		self.pred = None
+		self.pendingList = []
+		self.proccessedTrans = {}
+		self.master=None
+		self.numSendSoFar=0
+		self.numRecvSoFar=0
+		self.notAddedToChain=False
+
+
+	def main():
+		#getSucAndPred()
+		while True:
+			if await(False):pass
+			elif timeout(1):
+				output("SERVER("+serverId+") SENDING PING TO MASTER")
+				if self.master != None:
+					pingMaster()
+
+				if self.notAddedToChain==True:
+					output("SERVER("+serverId+") NOT ADDED TO THE CHAIN")
+					time.sleep(20)
+					onWakeUp()
+
+
+	def setup_logfile(filename):
+		rootlog = logging.getLogger('')
+		filelvl = logging.INFO
+		fh = logging.FileHandler(filename)
+		formatter = logging.Formatter('[%(asctime)s]%(name)s: %(message)s')
+		fh.setFormatter(formatter)
+		fh.setLevel(filelvl)
+		rootlog._filelvl = filelvl
+		rootlog.addHandler(fh)
+
+	def deathCheck(transType):
+		if self.numSend!=-1: 
+			if self.numSendSoFar>=self.numSend: 
+				output("SERVER ("+serverId+") CRASHED")
+				exit(1)
+			elif transType==1:
+				self.numSendSoFar=self.numSendSoFar+1
+
+		if self.numRecv!=-1:
+			if self.numRecvSoFar>=self.numRecv:
+				output("SERVER ("+serverId+") CRASHED")
+				exit(1)
+			elif transType==0:
+				self.numRecvSoFar=self.numRecvSoFar+1
+
+	def pingMaster():
+		deathCheck(1)
+		send(("PingToMaster",serverId),to=self.master)
+
+	def getSucAndPred():
+		deathCheck(1)		
+		send(('getSucAndPred', bank,self.serverId), to=self.master)
+		
+
+	def onWakeUp():
+		deathCheck(1)
+		output("TRYING TO ADD TO THE CHAIN")
+		send(('AddToChain',bank,self.serverId),to=self.master)
+
+
+	'''Receive handler for chain extension'''
+	def receive(msg=('YouGotABud',bud),from_=p):
+		output("SERVER ("+serverId+")RECEIVED CHAIN EXTENSION FROM MASTER")
+		for key in self.accounts:
+			output("Sending accounts")
+			msg={}
+			msg['type']='accounts'
+			msg['key']=key
+			msg['val']=self.accounts[key]
+			deathCheck(1)
+			send(('MessageToNewTail',msg),to=bud)
+			# if await(received('ack',from_=bud)):
+			# 	output("SERVER ("+serverId+") Message has been acked")
+			# 	deathCheck(0)
+			# elif timeout(3):
+			# 	output("SERVER ("+serverId+") The tail has died")
+			
+		for key in self.proccessedTrans:
+			output("Sending processed trans")
+			msg={}
+			msg['type']='proccessedTrans'
+			msg['key']=key
+			msg['val']=self.proccessedTrans[key]
+			deathCheck(1)
+			send(('MessageToNewTail',msg),to=bud)
+			
+			# if await(received('ack',from_=bud)):
+			# 	output("SERVER ("+serverId+") Message has been acked")
+			# 	deathCheck(0)
+			# elif timeout(3):
+			# 	output("SERVER ("+serverId+") The tail has died")
+				
+			
+		for item in self.pendingList:
+			output("Sending pending list")
+			msg={}
+			msg['type']='pendingList'
+			msg['val']=item
+			deathCheck(1)
+			send(('MessageToNewTail',msg),to=bud)
+			6
+			# if await(received('ack',from_=bud)):
+			# 	output("SERVER ("+serverId+") Message has been acked")
+			# 	deathCheck(0)
+			# elif timeout(3):
+			# 	output("SERVER ("+serverId+") The tail has died")
+				
+			
+		send(('DoneSendingToNewTail'),to=bud)
+		output("Sent to my buddy")
+
+
+	def receive(msg=('DoneSendingToNewTail'),from_=p):
+		output("SERVER ("+serverId+")RECEIVED EVERYTHING FROM TAIL")
+		send(('NewTailReady',bank,serverId,p),to=self.master)
+		return
 
 
 
-    def main():
-    	getSucAndPred()
-    	await(False)
+	def receive(msg=('MessageToNewTail',msg),from_=p):
+		output("SERVER ("+serverId+")RECEIVED MESSAGE FROM OLDTAIL")
+		deathCheck(0)
+		if msg['type']=='accounts':
+			self.accounts[msg['key']]=msg['val']
+		if msg['type']=='proccessedTrans':
+			self.proccessedTrans[msg['key']]=msg['val']
+		if msg['type']=='pendingList':
+			if msg['val'] not in self.pendingList:
+				self.pendingList.append(msg['val'])
+		deathCheck(1)
+		send(('ack'),to=p)		
 
-    def getSucAndPred():
-    	send(('getSucAndPred', bank), to=master)
+	def receive(msg=('YouAreNewTail'),from_=p):
+		output("SERVER ("+serverId+") I am new tail for bank "+bank)
+		self.notAddedToChain=False
 
+	'''Init handler for a server when it learns about the master'''	
+	def receive(msg=("PingFromMaster"),from_=p):
+		deathCheck(0)		
+		self.master=p
+		output ("SERVER ("+serverId+")RECEIVED PING FROM MASTER")
+		if startTime>0:
+			time.sleep(startTime)
+			self.notAddedToChain=True
+			output("SERVER (" + serverId+") WOKE UP AND WANTS TO JOIN LIST")
+			onWakeUp()
+		else:
+			getSucAndPred()
+	
+	def receive(msg=("OnFailureMessage",newSuc,newPred),from_=p):
+		output("SERVER ("+serverId+")RECEIVED OnFailureMessage FROM MASTER")
+		self.suc=newSuc
+		self.pred=newPred
+		output("bank: " + bank +"SERVER ("+serverId+")"+"\n" "suc: " + str(suc) + "\npred:" + str(pred) + "\n")
 
-    '''Message handlers'''    
-    def receive(msg=('getSucAndPred', newSuc, newPred), from_=p):
-    	self.suc = newSuc
-    	self.pred = newPred
-    	output("bank: " + bank +"\n" "suc: " + str(suc) + "\npred:" + str(pred) + "\n")
-
-    def receive(msg=('messageFromSuc', req), from_=p): 
-    	self.pendingList.pop(self.pendingList.index(req))
-    	output('pendingList.pop: ' + str(self.pendingList))
-    	if self.pred != None:
-    		output(bank + ' sending to pred')
-    		send(('messageFromSuc', req), to=self.pred)
-
-
-    '''A helper function to compare two dictionaries'''        
-    def compareReq(d1, d2):
-    	for key in d1:
-    		if key != 'sender':
-    			if d1[key] != d2[key]:
-    				return False
-    	for key in d2:
-    		if key != 'sender':
-    			if d1[key] != d2[key]:
-    				return False
-    	return True
-
-
-
-    '''This function handles all the request from clients'''    
-    def handleTransaction(type, req, p):
-    	if self.pred == None:
-        	req['sender'] = p
-        
-    	accountNum = req['accountNum']
-    	if accounts.get(req['accountNum'], None) == None:
-    		accounts[accountNum] = 0
-
-    	outcome = ""
-    	if self.proccessedTrans.get(req['reqId'], None) == None:
-    		if type == 'deposit':
-        		accounts[accountNum] += req['amount']
-        		outcome = "Processed"
-        		self.proccessedTrans[req['reqId']] = req
-    		elif type=='withdraw':
-        		if accounts[accountNum] >= req['amount']:
-        			accounts[accountNum] -= req['amount']
-        			outcome = "Processed"
-        			self.proccessedTrans[req['reqId']] = req
-        		else:
-        			outcome = 'InsufficientFunds'
-    	else: 
-    		if compareReq(req, self.proccessedTrans[req['reqId']]):
-    			outcome = "Processed"
-    		else:
-    			outcome = "IncosistentHistory"
-
-    	if self.suc != None:
-    		self.pendingList.append(req)
-    		output('pendingList.append: ' + str(self.pendingList))
-    		send((type, req), to=self.suc)
-    	else:
-    		output(bank + ' sending to pred')
-    		send(('messageFromSuc', req), to=self.pred)
-    		sendData = {
-    			'reqId' : req['reqId'],
-    			'outcome' : outcome,
-    			'balance' : accounts[accountNum],
-    			'accountNum' : req['accountNum']
-    		}
-    		send(('response', sendData), to=req['sender'])
+		if self.suc!=None:
+			for req in self.pendingList:
+				send((req['type'], req), to=self.suc)
 
 
 
-    '''Message handlers'''
 
-    def receive(msg=('withdraw', req), from_=p):
-    	output(bank+" SERVER RECEIVED WITHDRAW\n" + str(req)+"\n")
-    	handleTransaction('withdraw', req, p)
-    
-    def receive(msg=('deposit', req), from_=p):
-        output(bank+" SERVER  RECEIVED DEPOSIT\n" + str(req)+"\n")
-        handleTransaction('deposit', req, p)
-    
-    def receive(msg=('getBalance', req), from_=p):
-        output(bank+" SERVER RECEIVED GETBALANCE\n" + str(req)+"\n")
-        bal = self.accounts.get(req['accountNum'], 0)
-        sendData = {
-    		'reqId' : req['reqId'],
-    		'outcome' : 'Processed',
-    		'balance' : bal,
-    		'accountNum' : req['accountNum']
-    	}
-        send(('response', sendData), to=p)
+	'''Message handlers'''    
+	def receive(msg=('getSucAndPred', newSuc, newPred), from_=p):
+		deathCheck(0)
+		self.suc = newSuc
+		self.pred = newPred
+		output("bank: " + bank +"SERVER ("+serverId+")"+"\n" "suc: " + str(suc) + "\npred:" + str(pred) + "\n")
+
+	def receive(msg=('messageFromSuc', req), from_=p):
+		deathCheck(0) 
+		self.pendingList.pop(self.pendingList.index(req))
+		output('pendingList.pop: ' + str(self.pendingList))
+		if self.pred != None:
+			output(bank + " SERVER ("+serverId+") sending to pred")
+			send(('messageFromSuc', req), to=self.pred)
+
+
+	'''A helper function to compare two dictionaries'''        
+	def compareReq(d1, d2):
+		for key in d1:
+			if key != 'sender':
+				if d1[key] != d2[key]:
+					return False
+		for key in d2:
+			if key != 'sender':
+				if d1[key] != d2[key]:
+					return False
+		return True
+
+
+
+	'''This function handles all the request from clients'''    
+	def handleTransaction(type, req, p):
+		if self.pred == None:
+			req['sender'] = p
+		
+		accountNum = req['accountNum']
+		if accounts.get(req['accountNum'], None) == None:
+			accounts[accountNum] = 0
+
+		outcome = ""
+		if self.proccessedTrans.get(req['reqId'], None) == None:
+			if type == 'deposit':
+				accounts[accountNum] += req['amount']
+				outcome = "Processed"
+				self.proccessedTrans[req['reqId']] = req
+			elif type=='withdraw':
+				if accounts[accountNum] >= req['amount']:
+					accounts[accountNum] -= req['amount']
+					outcome = "Processed"
+					self.proccessedTrans[req['reqId']] = req
+				else:
+					outcome = 'InsufficientFunds'
+		else: 
+			if compareReq(req, self.proccessedTrans[req['reqId']]):
+				outcome = "Processed"
+			else:
+				outcome = "IncosistentHistory"
+
+		if self.suc != None:
+			self.pendingList.append(req)
+			output("SERVER ("+serverId+")pendingList.append: " + str(self.pendingList))
+			deathCheck(1)
+			send((type, req), to=self.suc)
+		elif self.suc==None and self.pred!=None:
+			output(bank + " SERVER ("+serverId+") sending to pred")
+			send(('messageFromSuc', req), to=self.pred)
+			sendData = {
+				'reqId' : req['reqId'],
+				'outcome' : outcome,
+				'balance' : accounts[accountNum],
+				'accountNum' : req['accountNum']
+			}
+			deathCheck(1)
+			send(('response', sendData), to=req['sender'])
+		elif self.suc==None and self.pred==None:
+			sendData = {
+				'reqId' : req['reqId'],
+				'outcome' : outcome,
+				'balance' : accounts[accountNum],
+				'accountNum' : req['accountNum']
+			}
+			deathCheck(1)
+			send(('response', sendData), to=req['sender'])
+
+
+
+
+	'''Message handlers'''
+
+	def receive(msg=('withdraw', req), from_=p):
+		deathCheck(0)
+		output(bank+" SERVER ("+serverId+") RECEIVED WITHDRAW\n" + str(req)+"\n")
+		handleTransaction('withdraw', req, p)
+	
+	def receive(msg=('deposit', req), from_=p):
+		deathCheck(0)
+		output(bank+" SERVER ("+serverId+")  RECEIVED DEPOSIT\n" + str(req)+"\n")
+		handleTransaction('deposit', req, p)
+	
+	def receive(msg=('getBalance', req), from_=p):
+		deathCheck(0)
+		output(bank+" SERVER ("+serverId+") RECEIVED GETBALANCE\n" + str(req)+"\n")
+		bal = self.accounts.get(req['accountNum'], 0)
+		sendData = {
+			'reqId' : req['reqId'],
+			'outcome' : 'Processed',
+			'balance' : bal,
+			'accountNum' : req['accountNum']
+		}
+		deathCheck(1)
+		send(('response', sendData), to=p)

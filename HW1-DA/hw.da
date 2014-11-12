@@ -5,50 +5,70 @@ import json
 initializes the servers, clients and master'''
 
 def main():
-    
-    Server = import_da('Server')
-    Client = import_da('Client')
-    Master = import_da('Master')
+	
+	Server = import_da('Server')
+	Client = import_da('Client')
+	Master = import_da('Master')
 
-    if len(sys.argv)<2:
-        print("Please enter a config file\n")
-        sys.exit(1)
+	if len(sys.argv)<2:
+		print("Please enter a config file\n")
+		sys.exit(1)
 
-    json_data=open(sys.argv[1])
-    data=json.load(json_data)
-    
+	json_data=open(sys.argv[1])
+	print(sys.argv[1])
+	data=json.load(json_data)
+	
 
-    """Creating client processes"""
-    clients={}
-    for i in range(len(data["clients"])):
-        client = new(Client.Client)
-        transList=data["clients"][i].get("transactions",None)
-        random=data["clients"][i].get("random",None)
-        clients[i]=[client,transList,random]
+	"""Creating client processes"""
+	clients={}
+	for i in range(len(data["clients"])):
+		client = new(Client.Client)
+		transList=data["clients"][i].get("transactions",None)
+		random=data["clients"][i].get("random",None)
+		clients[i]=[client,transList,random]
 
-    """Creating server processes"""    
-    servers={}
-    banks=[]
-    for i in range(len(data["banks"])):
-        bank=data["banks"][i]["name"]
-        chainLength=data["banks"][i]["chainLength"]
-        server=list(new(Server.Server, num= chainLength))
-        servers[bank]=server
-        banks.append(bank)
+	"""Creating server processes"""    
+	servers={}
+	banks=[]
+	for i in range(len(data["banks"])):
+		bankName=data["banks"][i]["name"]
+		bankServers=[]
+		delayedServers=[]
+		for j in range(len(data["banks"][i]["nodes"])):
+			startTime=data["banks"][i]["nodes"][j].get("startTime",0)
+			numSend=data["banks"][i]["nodes"][j].get("numSend",-1)
+			numRecv=data["banks"][i]["nodes"][j].get("numRecv",-1)
+			key=bankName+"."+str(j+1)
+			node=new(Server.Server,[key,startTime,numSend,numRecv,bankName],num=1)
+			node=list(node)
+			bankNodeInfo={"sId":key,"startTime":startTime,"server":node[0]}
+			if startTime==0:
+				bankServers.append(bankNodeInfo)
+			else:
+				delayedServers.append(bankNodeInfo)
+
+		delayedServers=sorted(delayedServers, key=lambda k: k['startTime'])
+		bankServers=bankServers+delayedServers
+		servers[bankName]=bankServers
+		banks.append(bankName)
 
 
-    master = new(Master.Master, [servers], num=1)
-    start(master)
+	print(servers)
+
+	master = new(Master.Master, [servers], num=1)
+	start(master)
 
 
-    """Setting up and starting server processes"""
-    for key in servers:
-        setup(servers[key],(master,key))
-        start(servers[key])
-    
-    """Setting up and starting client processes"""
-    i=1
-    for key in clients:
-        setup(clients[key][0], (master, i, clients[key][1],clients[key][2],banks))
-        start(clients[key][0])
-        i+=1
+	"""Setting up and starting server processes"""
+	for key in servers:
+	    nodeList=servers[key]
+	    for node in nodeList:
+	        setup(node["server"])
+	        start(node["server"])
+	
+	"""Setting up and starting client processes"""
+	i=1
+	for key in clients:
+	    setup(clients[key][0], (master, i, clients[key][1],clients[key][2],banks))
+	    start(clients[key][0])
+	    i+=1
