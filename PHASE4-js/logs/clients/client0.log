@@ -1,0 +1,80 @@
+1415947089764: 0: New Head detected: {"ip":"127.0.0.1","port":5610}
+
+1415947089764: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947089773: 0: CLIENT RECIEVED: {"reqId":"5.5.5","outcome":"Proccessed","balance":100}
+
+
+
+1415947091773: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947091784: 0: CLIENT RECIEVED: {"reqId":"6.6.6","outcome":"Proccessed","balance":90}
+
+
+
+1415947093786: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"0.0.2","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947093796: 0: CLIENT RECIEVED: {"reqId":"0.0.2","outcome":"InsufficientFunds","balance":0}
+
+
+
+1415947095797: 0: New Tail detected: {"ip":"127.0.0.1","port":5612}
+
+1415947095797: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"0.0.3","type":"getBalance","accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5612
+
+
+1415947095798: 0: Get Balance Response from tail: {"reqID":"0.0.3","balance":10,"outcome":"Proccessed"}
+
+1415947097800: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947097810: 0: CLIENT RECIEVED: {"reqId":"0.0.4","outcome":"Proccessed","balance":92}
+
+
+
+1415947099812: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947099816: 0: CLIENT RECIEVED: {"reqId":"5.5.5","outcome":"IncosistentHistory","balance":8}
+
+
+
+1415947101818: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947101823: 0: CLIENT RECIEVED: {"reqId":"6.6.6","outcome":"IncosistentHistory","balance":8}
+
+
+
+1415947103824: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947103829: 0: CLIENT RECIEVED DUPLICATE: {"reqId":"6.6.6","outcome":"IncosistentHistory","balance":8}
+
+
+
+1415947105831: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"0.0.8","type":"getBalance","accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5612
+
+
+1415947105832: 0: Get Balance Response from tail: {"reqID":"0.0.8","balance":8,"outcome":"Proccessed"}
+
+1415947107834: 0: 
+CLIENT SENDING REQUEST!! : {"reqId":"0.0.9","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}: ip: 127.0.0.1, port: 5610
+
+
+1415947107840: 0: CLIENT RECIEVED: {"reqId":"0.0.9","outcome":"InsufficientFunds","balance":8}
+
+
+

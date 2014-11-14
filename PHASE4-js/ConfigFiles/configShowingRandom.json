@@ -1,0 +1,40 @@
+{
+	"comment" : "This config shows how to setup random requests",
+	"master" : {
+		"ip" : "127.0.0.1",
+		"port" : 8023
+	},
+	"banks" : [
+		{
+			"name" 	: "TFCU",
+			"port" 	: 5600,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 2
+		},
+		{
+			"name" 	: "CHASE",
+			"port" 	: 5700,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 3
+		},
+		{
+			"name" 	: "Bank of America",
+			"port" 	: 5800,
+			"ip"	: "127.0.0.1",
+			"chainLength"	: 3
+		}
+	],
+	"clients" : [
+		{
+			"port" : 6000,
+			"ip"			: "127.0.0.1",
+			"random" : {
+				"seed" : 5,
+				"numReq" : 15,
+				"probGetBalance" : 0.1,
+				"probDeposit" : 0.75,
+				"probWithdraw" : 0.15
+			}
+		}
+	]
+}

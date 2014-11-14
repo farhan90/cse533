@@ -1,0 +1,48 @@
+TODO:
+
+-- Simple Fails --
+
+'simpleFail.json'
+FAILED HEAD
+FAILED TAIL
+FAILURE OF NODE
+**modify it to test the above 3
+
+
+'FailAndThenFailSPlus.json'
+Failure S+ after S fails while recieving data from S-
+
+'FailAndThenFailSMinus.json'
+Failure of S- after S fails while sending data to S+
+
+-- EXTENDING CHAIN -- 
+
+
+'simpleJoin.json' & 'simpleJoinFail.json'
+When a node is joining, have it fail 
+	AND have it succeed
+
+
+'onlyNodeAndJoin.json'
+You are the only node,
+and some one joins AND joiner fails
+**set numRecv to -2 for failure before add succeeds
+
+
+'multipleNodesJoining.json'
+Two nodes try to join at same time - 
+	joinging fails AND joinging succeeds
+
+'tailFailureOnJoin.json'
+Failure of Old Tail during joing
+
+'bothTailsFail.json'
+Failure of both joining and old tail
+
+
+
+Multiple Banks and Clients
+'simpleFailMultBanks.json'
+
+Multiple banks and clients with joiining servers
+'simpleJoinMultBanks.json'

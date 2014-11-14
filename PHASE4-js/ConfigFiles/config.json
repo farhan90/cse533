@@ -1,0 +1,137 @@
+{
+	"comment" : "This config shows deposit, withdraw, failed withdraw, and getBalance all one one account. It also shows how to manually set the reqId, the two last transactions share a reqId w/ the first transaction. One will produce an outcome of Processed the other InconsistentHistory",
+	"master" : {
+		"ip" : "127.0.0.1",
+		"port" : 8023
+	},
+	"banks" : 
+	[
+		{
+			"name" 	: "TFCU",
+			"nodes"	: [
+				{
+					"port" 	: 5610,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5611,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5612,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				}
+			]
+		},
+		{
+			"name" 	: "CHASE",
+			"nodes"	: [
+				{
+					"port" 	: 5620,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5621,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5622,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				}
+			]
+		}
+	],
+	"clients" : [
+		{
+			"port" : 6000,
+			"ip"			: "127.0.0.1",
+			"transactions" 	: [
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 100,
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5"
+				},
+				{
+					"type" 		: "transfer",
+					"accountNum": 1,
+					"amount"	: 90,
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6",
+					"destBank"	: "CHASE",
+					"destAct"	: 5
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 5,
+					"amount"	: 8,
+					"bank"		: "TFCU"
+				},
+				{
+					"type" 		: "getBalance",
+					"accountNum": 1,
+					"bank"		: "TFCU"
+				},
+				{
+					"type" 		: "transfer",
+					"accountNum": 1,
+					"amount"	: 2,
+					"bank"		: "TFCU",
+					"destBank"	: "CHASE",
+					"destAct"	: 5
+				},
+				{
+					"type" 		: "deposit",
+					"accountNum": 1,
+					"amount"	: 101,
+					"bank"		: "TFCU",
+					"reqId"		: "5.5.5"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 25,
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 23,
+					"bank"		: "TFCU",
+					"reqId"		: "6.6.6"
+				},
+				{
+					"type" 		: "getBalance",
+					"accountNum": 1,
+					"bank"		: "TFCU"
+				},
+				{
+					"type" 		: "withdraw",
+					"accountNum": 1,
+					"amount"	: 25,
+					"bank"		: "TFCU"
+				}
+			]	
+		}
+	]
+}
