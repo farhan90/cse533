@@ -107,7 +107,7 @@ function sendCurrentTransaction(clientServer) {
 				log("Time out occurred for seqNum: " + indexSent, clientServer);
 				sendCurrentTransaction(clientServer);
 			}
-		}, 1000 * 12);
+		}, 1000 * 22);
 	}
 }
 

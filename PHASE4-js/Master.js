@@ -137,61 +137,72 @@ function checkForFailuresAndAditions(master) {
 	var oldState = JSON.parse(JSON.stringify(master.oldState));
 	master.oldState = JSON.parse(JSON.stringify(master.currentState));
 
+	var headCrashes = [];	//array of bank names where there head crashed this time!
+
 	if(JSON.stringify(master.currentState) != JSON.stringify(oldState)) {
 		var ignore = false;
 		for(var bank in master.currentState) {
-			var len = 0;
-			for(k in master.currentState[bank]) len++;
-			for(var i = len-1; i>=0; i--) {
-				var node = master.orderCameOnline[bank][i];
-				var alive = master.currentState[bank][node];
-				if(alive == 0 && oldState[bank][node] == 1) {
-					//this node has failed
-					//no need to notiy this node
+			if(JSON.stringify(master.currentState[bank]) != JSON.stringify(oldState[bank])) {
+				var headOfBank = head(bank, master, oldState);
+				var len = 0;
+				for(k in master.currentState[bank]) len++;
+				for(var i = len-1; i>=0; i--) {
+					var node = master.orderCameOnline[bank][i];
+					var alive = master.currentState[bank][node];
+					if(alive == 0 && oldState[bank][node] == 1) {
 
-					//if it is old tail inform joinging tail
-					//new tail 
-					//and new existing tail that it has a neightbor
-					if(master.lastTails[bank] != null && master.lastTails[bank].port == node && master.joiningTails[bank] != null) {
-						//send oldTailCrash to joiner
-						var joiner = master.joiningTails[bank];
-						var joinerNode = getNodeFor(bank, joiner.port, master);
-						sendRequest(joinerNode.ip, joinerNode.port, {"type":"oldTailCrash"}, null, master);
-						master.currentState[bank][joiner.port] = 0;
-						master.oldState[bank][joiner.port] = 0;
-						master.joiningTails[bank] = null;
-						log("Informing the joinging tail the current tail crashed", master);
+						//head of bank failed - inform tails of head crash
+						if(headOfBank.port == node)
+							headCrashes.push(bank);
+
+
+						//this node has failed
+						//no need to notiy this node
+
+						//if it is old tail inform joinging tail
+						//new tail 
+						//and new existing tail that it has a neightbor
+						if(master.lastTails[bank] != null && master.lastTails[bank].port == node && master.joiningTails[bank] != null) {
+							//send oldTailCrash to joiner
+							var joiner = master.joiningTails[bank];
+							var joinerNode = getNodeFor(bank, joiner.port, master);
+							sendRequest(joinerNode.ip, joinerNode.port, {"type":"oldTailCrash"}, null, master);
+							master.currentState[bank][joiner.port] = 0;
+							master.oldState[bank][joiner.port] = 0;
+							master.joiningTails[bank] = null;
+							log("Informing the joinging tail the current tail crashed", master);
+						}
 					}
-				}
-				else if(alive == 1 && oldState[bank][node] == 0) {
-					//this node has been started - is handled else where
-				}
-				else if(alive == 1 && oldState[bank][node] == 1 && ignore == false) {
-					//this node remained alive - notify it of new pred and succ
-					var newPred = predForNode(bank, node, master);
-					var newSucc = succForNode(bank, node, master);
+					else if(alive == 1 && oldState[bank][node] == 0) {
+						//this node has been started - is handled else where
+					}
+					else if(alive == 1 && oldState[bank][node] == 1 && ignore == false) {
+						//this node remained alive - notify it of new pred and succ
+						var newPred = predForNode(bank, node, master);
+						var newSucc = succForNode(bank, node, master);
 
-					var bankNode = getNodeFor(bank, node, master);
-					log("Sending failure detected", master);
-					sendRequest(bankNode.ip, bankNode.port, {
-						"type" : "NewPredSuccCrash",
-						"newPred" : newPred,
-						"newSucc" : newSucc 
-					}, null, master);
-				}
-				else if(alive == 0 && oldState[bank][node] == 2) {
-					//this guys was joining and failed -> inform the old tail
-					log("Joining Node Crashed: Informing old tail of crash", master);
-					var tailToNotify = master.lastTails[bank];
-					sendRequest(tailToNotify.ip, tailToNotify.port, {
-						"type" : "YouveGotAFriend",
-						"port" : -1,
-						"ip" : "-1" 
-					}, null, master);
-					master.joiningTails[bank] = null;
-					master.lastTails[bank] = null;
+						var bankNode = getNodeFor(bank, node, master);
+						log("Sending failure detected", master);
+						sendRequest(bankNode.ip, bankNode.port, {
+							"type" : "NewPredSuccCrash",
+							"newPred" : newPred,
+							"newSucc" : newSucc 
+						}, null, master);
+					}
+					else if(alive == 0 && oldState[bank][node] == 2) {
+						//this guys was joining and failed -> inform the old tail
+						log("Joining Node Crashed: Informing old tail of crash", master);
+						var tailToNotify = master.lastTails[bank];
+						sendRequest(tailToNotify.ip, tailToNotify.port, {
+							"type" : "YouveGotAFriend",
+							"port" : -1,
+							"ip" : "-1" 
+						}, null, master);
+						master.joiningTails[bank] = null;
+						master.lastTails[bank] = null;
 
-					ignore = master.currentState[bank][tailToNotify.port] == 1;
+						ignore = master.currentState[bank][tailToNotify.port] == 1;
+					}
 				}
 			}
 		}
@@ -204,6 +215,17 @@ function checkForFailuresAndAditions(master) {
 		for(var i in bank) {
 			var node = bank[i];
 			master.currentState[name][node.port] = 0;
+		}
+	}
+
+	//inform tails of headCrashed
+	if(headCrashes.length > 0) {
+		for(var name in master.banks) {
+			var tail = tailOfChain(name, master);
+			sendRequest(tail.ip, tail.port, {
+				'type' : 'bankHeadCrashed',
+				'banks' : headCrashes
+			}, null, master);
 		}
 	}
 }
@@ -299,7 +321,7 @@ function getNodeFor(bank, port, master) {
 	}
 }
 
-getHead = function(bank, response, master) {
+function head(bank, master, state) {
 	var ret = indexForNode(bank, -1, master);
 	var keys = ret['keys'];
 	
@@ -308,12 +330,17 @@ getHead = function(bank, response, master) {
 		'port' : null
 	};
 	for(var i=0; i < keys.length; i++) {
-		if(master.oldState[bank][keys[i]] == 1) {
+		if(state[bank][keys[i]] == 1) {
 			var port = keys[i];
 			resObj = getNodeFor(bank, port, master);
 			break;
 		}
 	}
+	return resObj;
+}
+
+getHead = function(bank, response, master) {
+	var resObj = head(bank, master, master.oldState);
 	response.writeHead(200);
 	response.end(JSON.stringify(resObj));
 };

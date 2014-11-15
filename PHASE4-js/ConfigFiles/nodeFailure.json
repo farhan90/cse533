@@ -1,5 +1,5 @@
 {
-	"comment" : "shows a simple join and join failure",
+	"comment" : "Sends a packet containing transfer to a dead node! When informed of new successor, resends the transfer",
 	"master" : {
 		"ip" : "127.0.0.1",
 		"port" : 8023
@@ -20,15 +20,41 @@
 					"port" 	: 5611,
 					"ip"	: "127.0.0.1",
 					"startTime"	: 0,
-					"numSent"	: -1,
-					"numRecv"	: -1
+					"numSent"	: 2,
+					"numRecv"	: 2
 				},
 				{
 					"port" 	: 5612,
 					"ip"	: "127.0.0.1",
-					"startTime"	: 2,
+					"startTime"	: 0,
 					"numSent"	: -1,
-					"numRecv"	: 2
+					"numRecv"	: -1
+				}
+			]
+		},
+		{
+			"name" 	: "CHASE",
+			"nodes"	: [
+				{
+					"port" 	: 5620,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5621,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
+				},
+				{
+					"port" 	: 5622,
+					"ip"	: "127.0.0.1",
+					"startTime"	: 0,
+					"numSent"	: -1,
+					"numRecv"	: -1
 				}
 			]
 		}
@@ -46,16 +72,18 @@
 					"reqId"		: "5.5.5"
 				},
 				{
-					"type" 		: "withdraw",
+					"type" 		: "transfer",
 					"accountNum": 1,
-					"amount"	: 25,
+					"amount"	: 100,
 					"bank"		: "TFCU",
-					"reqId"		: "6.6.6"
+					"reqId"		: "6.6.6",
+					"destBank"	: "CHASE",
+					"destAct"	: 5
 				},
 				{
 					"type" 		: "withdraw",
-					"accountNum": 1,
-					"amount"	: 100,
+					"accountNum": 5,
+					"amount"	: 8,
 					"bank"		: "TFCU"
 				},
 				{
@@ -64,11 +92,12 @@
 					"bank"		: "TFCU"
 				},
 				{
-					"type" 		: "deposit",
+					"type" 		: "transfer",
 					"accountNum": 1,
-					"amount"	: 100,
+					"amount"	: 2,
 					"bank"		: "TFCU",
-					"reqId"		: "5.5.5"
+					"destBank"	: "CHASE",
+					"destAct"	: 5
 				},
 				{
 					"type" 		: "deposit",
@@ -99,7 +128,7 @@
 				{
 					"type" 		: "withdraw",
 					"accountNum": 1,
-					"amount"	: 10,
+					"amount"	: 25,
 					"bank"		: "TFCU"
 				}
 			]	

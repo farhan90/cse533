@@ -1,44 +1,56 @@
-1415947087815: Sending: {"suc":{"ip":"127.0.0.1","port":5611},"pred":null}
+1416043636762: Sending: {"suc":{"ip":"127.0.0.1","port":5611},"pred":null}
 
-1415947087817: Sending: {"suc":{"ip":"127.0.0.1","port":5612},"pred":{"ip":"127.0.0.1","port":5610}}
+1416043636764: Sending: {"suc":{"ip":"127.0.0.1","port":5612},"pred":{"ip":"127.0.0.1","port":5610}}
 
-1415947087817: Sending: {"suc":null,"pred":{"ip":"127.0.0.1","port":5611}}
+1416043636764: Sending: {"suc":null,"pred":{"ip":"127.0.0.1","port":5611}}
 
-1415947087817: Sending: {"suc":{"ip":"127.0.0.1","port":5621},"pred":null}
+1416043636764: Sending: {"suc":{"ip":"127.0.0.1","port":5621},"pred":null}
 
-1415947087818: Sending: {"suc":{"ip":"127.0.0.1","port":5622},"pred":{"ip":"127.0.0.1","port":5620}}
+1416043636764: Sending: {"suc":{"ip":"127.0.0.1","port":5622},"pred":{"ip":"127.0.0.1","port":5620}}
 
-1415947087820: Sending: {"suc":null,"pred":{"ip":"127.0.0.1","port":5621}}
+1416043636767: Sending: {"suc":null,"pred":{"ip":"127.0.0.1","port":5621}}
 
-1415947092758: CHECKING FOR FAILURES
+1416043641705: CHECKING FOR FAILURES
 
-1415947097759: CHECKING FOR FAILURES
+1416043646706: CHECKING FOR FAILURES
 
-1415947102760: CHECKING FOR FAILURES
+1416043646706: Sending failure detected
 
-1415947107761: CHECKING FOR FAILURES
+1416043646707: sending: {"type":"NewPredSuccCrash","newPred":{"ip":"127.0.0.1","port":5610},"newSucc":null}
 
-1415947112763: CHECKING FOR FAILURES
+1416043646707: Sending failure detected
 
-1415947117765: CHECKING FOR FAILURES
+1416043646707: sending: {"type":"NewPredSuccCrash","newPred":null,"newSucc":{"ip":"127.0.0.1","port":5612}}
 
-1415947122766: CHECKING FOR FAILURES
+1416043646707: Sending failure detected
 
-1415947127768: CHECKING FOR FAILURES
+1416043646708: sending: {"type":"NewPredSuccCrash","newPred":{"ip":"127.0.0.1","port":5621},"newSucc":null}
 
-1415947132770: CHECKING FOR FAILURES
+1416043646708: Sending failure detected
 
-1415947137770: CHECKING FOR FAILURES
+1416043646708: sending: {"type":"NewPredSuccCrash","newPred":null,"newSucc":{"ip":"127.0.0.1","port":5622}}
 
-1415947142771: CHECKING FOR FAILURES
+1416043646708: sending: {"type":"bankHeadCrashed","banks":["CHASE"]}
 
-1415947147773: CHECKING FOR FAILURES
+1416043646708: sending: {"type":"bankHeadCrashed","banks":["CHASE"]}
 
-1415947152774: CHECKING FOR FAILURES
+1416043651708: CHECKING FOR FAILURES
 
-1415947157774: CHECKING FOR FAILURES
+1416043656707: CHECKING FOR FAILURES
 
-1415947162775: CHECKING FOR FAILURES
+1416043661709: CHECKING FOR FAILURES
 
-1415947167776: CHECKING FOR FAILURES
+1416043666709: CHECKING FOR FAILURES
+
+1416043671711: CHECKING FOR FAILURES
+
+1416043676713: CHECKING FOR FAILURES
+
+1416043681714: CHECKING FOR FAILURES
+
+1416043686715: CHECKING FOR FAILURES
+
+1416043691717: CHECKING FOR FAILURES
+
+1416043696717: CHECKING FOR FAILURES
 

@@ -96,10 +96,13 @@ function sendPendingListToClient(bankServer, httpServer) {
 	for(var i in bankServer.pendingList) {
 		var data = bankServer.pendingList[i];
 		var responseForClient = bankServer.responses[data.order];
-		log("Sending to client: " + JSON.stringify(responseForClient), bankServer);
-		sendRequest(responseForClient.client.ip, responseForClient.client.port, responseForClient, null, bankServer, httpServer);
+		
+		if(data.type != "transfer" || (data.type == "transfer" && data.destBank == bankServer.bank)) {
+			log("Sending to client: " + JSON.stringify(responseForClient), bankServer);
+			sendRequest(responseForClient.client.ip, responseForClient.client.port, responseForClient, null, bankServer, httpServer);
+		}
 
-		if(bankServer.pred != null) {
+		if(bankServer.pred != null && (data.type != "transfer" || (data.type == "transfer" && data.destBank == bankServer.bank))) {
 			data['sender'] = {
 				ip : bankServer.ip,
 				port : bankServer.port
@@ -107,8 +110,13 @@ function sendPendingListToClient(bankServer, httpServer) {
 			log("Sending ACK to pred: " + data.order, bankServer);
 			sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
 		}
+		else if(data.type == "transfer" && data.destBank != bankServer.bank) {
+			//we need to resend this to the destBank - && not remove this from the pendingList
+			//only remove from pendingList if destBank == destBank of current order
+			sendTransactionToHead(data.destBank, data, bankServer, httpServer);
+		}
 	}
-	removeItemFromPendingList(99999, bankServer.pendingList, bankServer);
+	removeItemFromPendingList(99999, bankServer.pendingList, bankServer, null);
 }
 
 function sendDataToNewTail(data, bankServer, httpServer) {
@@ -169,7 +177,11 @@ function recieved(data, response, bankServer, httpServer) {
 	if(bankServer.alive == false) return;
 
 	bankServer.numRecv++;
-	if(data.type == "oldTailCrash") {
+	if(data.type == "bankHeadCrashed") {
+		log("Recieved notification that bank head crashed\nSending transfers to new head", bankServer);
+		sendPendingListToClient(bankServer, httpServer);
+	}
+	else if(data.type == "oldTailCrash") {
 		log("The tail crashed while we were joining....\nWill wait for old tails pred to be informed", bankServer);
 		bankServer.imJoining = false;
 		bankServer.proccessedTrans = {};
@@ -268,37 +280,73 @@ function recieved(data, response, bankServer, httpServer) {
 		else if(portAndIPCheck(data.sender, bankServer.suc)) {
 
 			//the request was from the successor - remove item from pendingList and send confirmation to pred
-			removeItemFromPendingList(data.order, bankServer.pendingList, bankServer);
+			removeItemFromPendingList(data.order, bankServer.pendingList, bankServer, data);
 			if(bankServer.pred != null) {
 				data['sender'] = {
 					ip : bankServer.ip,
 					port : bankServer.port
 				}
+				log("Sending ACK back to pred: " + bankServer.pred.port, bankServer);
 				sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
 			}
+			else if(data.type == "transfer" && data.bank != bankServer.bank) {
+				//I am the head, but need to send to source bank
+				log("Sending transfer ACK back to soure bank: " + data.bank, bankServer);
+				data.order = data.sourceOrder;
+				sendTransactionToTail(data.bank, data, bankServer, httpServer);
+			}
+
 			response.end();
 		}
 		else if(data.type == "transfer") {
-			//should not happen
-			normalTransaction(data, response, bankServer, httpServer);
+			//is this from tail of a bank or the ACK from a head of a bank
+			if(data.sourceOrder == null) {
+				//proccess the transfer
+				//this is from the tail of a bank
+				normalTransaction(data, response, bankServer, httpServer);
+			}	
+			else {
+				//this is an ACK from someone
+				removeItemFromPendingList(data.order, bankServer.pendingList, bankServer, data);
+				if(bankServer.pred != null) {
+					data['sender'] = {
+						ip : bankServer.ip,
+						port : bankServer.port
+					}
+					sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
+				}
+			}
 			response.end();
 		}
 	}
 }
 
 //helper for removing item from pending list
-function removeItemFromPendingList(order, pendingList, bankServer) {
-	log("Removing ACKS below " + order, bankServer);
+function removeItemFromPendingList(order, pendingList, bankServer, data) {
+	if(order != 99999)
+		log("Recieved ack for " + order, bankServer);
 	var len = pendingList.length;
 	var index = 0;
+	var transferBank = null;
+	if(data != null && data.type == "transfer")
+		transferBank = data.destBank;
+
 	for(var i=0; i<len; i++) {
 		if(index < pendingList.length && order >= pendingList[index].order) {
-			var ofd = bankServer.responses;
-			var ordert = pendingList[index].order;
-			delete ofd[ordert];
-			log("BS Removing " + JSON.stringify(pendingList[index]) + ", from pendingList" + " len: " + (pendingList.length-1), bankServer);
-			pendingList.splice(index, 1);
-			index--;
+			var shouldDelete = false;
+			if(pendingList[index].type != "transfer") 
+				shouldDelete = true;
+			else if(transferBank != null  && transferBank == pendingList[index].destBank) 
+				shouldDelete = true;
+
+			if(shouldDelete) {
+				var ofd = bankServer.responses;
+				var ordert = pendingList[index].order;
+				delete ofd[ordert];
+				log("BS Removing ACKS below " + order + " for " + JSON.stringify(pendingList[index]) + ", from pendingList" + " len: " + (pendingList.length-1), bankServer);
+				pendingList.splice(index, 1);
+				index--;
+			}
 		}
 		index++;
 	}
@@ -331,19 +379,17 @@ function getBalance(data, response, bankServer) {
 //helper for withdraw and deposit - takes in request data, and response, sends info to correct parties
 function normalTransaction(data, response, bankServer, httpServer) {
 	var accounts = bankServer.accounts;
-	log("BS Data: " + JSON.stringify(data), bankServer);
-
-	//create account if none exists
-	if(accounts[data.accountNum] == null) {
-		accounts[data.accountNum] = 0;
-		log("BS: created account: " + data.accountNum, bankServer);
-	}
+	log("Attempting transaction" + JSON.stringify(data), bankServer);
 
 	//transfering to this bank!
 	if(data.type == "transfer" && data.destBank == bankServer.bank && accounts[data.destAct] == null) {
 		accounts[data.destAct] = 0;
 		log("BS: created account: " + data.accountNum, bankServer);
 	} 
+	else if(accounts[data.accountNum] == null && data.type != "transfer") {
+		accounts[data.accountNum] = 0;
+		log("BS: created account: " + data.accountNum, bankServer);
+	}
 
 	var outcome = "";
 
@@ -372,16 +418,13 @@ function normalTransaction(data, response, bankServer, httpServer) {
 			}
 		}
 		else if(data.type == "transfer") {
-			log("in transfer",bankServer);
 			log(JSON.stringify(data), bankServer);
 
 			if(data.bank == bankServer.bank) {
-				log("in src bank",bankServer);
 				//remove money form here!!!
 				if(accounts[data.accountNum] < data.amount) {
-					log("in transfer - not enough funds",bankServer);
 					outcome = "InsufficientFunds";
-					log("BS: InsufficientFunds - only had " + accounts[data.accountNum] + ", requested: " + data.amount, bankServer);
+					log("BS: Transfer InsufficientFunds - only had " + accounts[data.accountNum] + ", requested: " + data.amount, bankServer);
 				}
 				else {
 					//if enough funds, reduce amount and record proccessedTrans
@@ -424,11 +467,10 @@ function normalTransaction(data, response, bankServer, httpServer) {
 		outcome : outcome,
 		balance : accounts[data.accountNum]
 	};
-	
-	if(data.type == "transfer" && data.destBank == bankServer.bank) {
+
+	if(data.destBank == bankServer.bank)
 		resObj.balance = accounts[data.destAct];
-		log("adding transfer to client response: " + JSON.stringify(resObj), bankServer);
-	}
+
 	data['sender'] = {
 		ip : bankServer.ip,
 		port : bankServer.port
@@ -451,8 +493,8 @@ function normalTransaction(data, response, bankServer, httpServer) {
 						sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
 						log("Sending ACK back to pred", bankServer);
 					}
-					else {
-						log("Sending to destBank - adding to pending list: " + JSON.stringify(data), bankServer);
+					else if(resObj.outcome == "Proccessed") {
+						log("Adding transfer to pending list: " + JSON.stringify(data), bankServer);
 						bankServer.pendingList.push(data);	
 					}
 				}
@@ -463,8 +505,15 @@ function normalTransaction(data, response, bankServer, httpServer) {
 			}
 
 			if(data.type == "transfer" && data.destBank != bankServer.bank) {
-				log("Sending to destBank", bankServer);
-				sendTransactionToHead(data.destBank, data, bankServer, httpServer);
+				if(resObj.outcome == "Proccessed") {
+					log("Forwarding transfer to destBank", bankServer);
+					sendTransactionToHead(data.destBank, data, bankServer, httpServer);
+				}
+				else {
+					log("transfer failed - sending ACK to pred and reply to client", bankServer);
+					sendRequest(data.client.ip, data.client.port, resObj, null, bankServer, httpServer);	
+					sendRequest(bankServer.pred.ip, bankServer.pred.port, data, null, bankServer, httpServer);
+				}
 			}
 			else {
 				log('Sending to client: ' + JSON.stringify(resObj), bankServer);
@@ -476,8 +525,15 @@ function normalTransaction(data, response, bankServer, httpServer) {
 	}
 	//else we are not the tail, forward the request to the successor
 	else {
-		if(bankServer.pred == null)
+
+		//if we are the head -> insert order variable
+		if(bankServer.pred == null) {
+
+			//if we already have an order -> this is a transfer from another bank -> preserve original order
+			if(data.order != null)
+				data.sourceOrder = data.order;
 			data['order'] = bankServer.order++;
+		}
 		log("Sending to suc + adding to pending list: " + JSON.stringify(data), bankServer);
 
 		bankServer.pendingList.push(data);
@@ -489,14 +545,20 @@ function normalTransaction(data, response, bankServer, httpServer) {
 
 //helper for comparing to request objects - ignores client and sender fields
 function compareData(d1, d2) {
+	var ignore = {
+		'sender' : true,
+		'client' : true,
+		'order' : true,
+		'sourceOrder' : true
+	};
 	for(var key1 in d1) {
-		if(key1 != "sender" && key1 != "client" && key1 != "order") {
+		if(ignore[key1] == null) {
 			if(d1[key1] != d2[key1])
 				return false;
 		}
 	}
 	for(var key2 in d2) {
-		if(key2 != "sender" && key2 != "client" && key2 != "order") {
+		if(ignore[key2] == null) {
 			if(d1[key2] != d2[key2])
 				return false;
 		}
@@ -586,6 +648,25 @@ function sendTransactionToHead(bank, data, bankServer, httpServer) {
 function getHeadFromMaster(bank, callback, bankServer, httpServer) {
 	sendRequest(bankServer.master.ip, bankServer.master.port, {
 		'type' : 'getHeadForBank',
+		'bank' : bank
+	}, function (resObj) {
+		callback(resObj);
+	}, bankServer, httpServer);
+}
+
+function sendTransactionToTail(bank, data, bankServer, httpServer) {
+	//get the head, on completion send the request
+	getTailFromMaster(bank, function(resObj) {
+		if(JSON.stringify(bankServer.lastTail) != JSON.stringify(resObj)) {
+			bankServer.lastTail = resObj;
+		}
+		sendRequest(resObj.ip, resObj.port, data, null, bankServer, httpServer);
+	}, bankServer, httpServer);
+}
+
+function getTailFromMaster(bank, callback, bankServer, httpServer) {
+	sendRequest(bankServer.master.ip, bankServer.master.port, {
+		'type' : 'getTailForBank',
 		'bank' : bank
 	}, function (resObj) {
 		callback(resObj);

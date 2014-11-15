@@ -1,90 +1,86 @@
-1415947089767: 5610: BS Data: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043638715: 5610: Attempting transaction{"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947089767: 5610: BS: created account: 1
+1416043638715: 5610: BS: created account: 1
 
-1415947089767: 5610: BS: Adding data to proccessedTrans: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043638715: 5610: BS: Adding data to proccessedTrans: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947089767: 5610: Sending to suc + adding to pending list: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":0}
+1416043638715: 5610: Sending to suc + adding to pending list: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":0}
 
-1415947089775: 5610: Removing ACKS below 0
+1416043638723: 5610: Recieved ack for 0
 
-1415947089775: 5610: BS Removing {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":0}, from pendingList len: 0
+1416043638723: 5610: BS Removing ACKS below 0 for {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":100,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":0}, from pendingList len: 0
 
-1415947091774: 5610: BS Data: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043642732: 5610: Attempting transaction{"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947091774: 5610: in transfer
+1416043642732: 5610: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947091774: 5610: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043642732: 5610: in transfer - have enough money - deducting
 
-1415947091774: 5610: in src bank
+1416043642733: 5610: BS: Adding data to proccessedTrans: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947091774: 5610: in transfer - have enough money - deducting
+1416043642733: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":1}
 
-1415947091774: 5610: BS: Adding data to proccessedTrans: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043646712: 5610: 
 
-1415947091774: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":1}
+Failure Detected? {"type":"NewPredSuccCrash","newPred":null,"newSucc":{"ip":"127.0.0.1","port":5612}}
 
-1415947093791: 5610: BS Data: {"reqId":"0.0.2","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043646712: 5610: oldSuc = {"ip":"127.0.0.1","port":5611}, oldPred = null
 
-1415947093791: 5610: BS: created account: 5
+1416043646712: 5610: BS: Detected Failure from Master, New Suc is: {"ip":"127.0.0.1","port":5612}
 
-1415947093791: 5610: BS: InsufficientFunds - only had 0, requested: 8
+1416043646712: 5610: Sending pendingList to the new successor: [{"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":1}]
 
-1415947093792: 5610: Sending to suc + adding to pending list: {"reqId":"0.0.2","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":2}
+1416043646725: 5610: Recieved ack for 1
 
-1415947093798: 5610: Removing ACKS below 2
+1416043646725: 5610: BS Removing ACKS below 1 for {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":1}, from pendingList len: 0
 
-1415947093798: 5610: BS Removing {"reqId":"6.6.6","bank":"TFCU","type":"transfer","amount":90,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":1}, from pendingList len: 1
+1416043648725: 5610: Attempting transaction{"reqId":"1.0.3","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947093798: 5610: BS Removing {"reqId":"0.0.2","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":2}, from pendingList len: 0
+1416043648725: 5610: BS: created account: 5
 
-1415947097800: 5610: BS Data: {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043648725: 5610: BS: InsufficientFunds - only had 0, requested: 8
 
-1415947097800: 5610: in transfer
+1416043648726: 5610: Sending to suc + adding to pending list: {"reqId":"1.0.3","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":2}
 
-1415947097800: 5610: {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043648727: 5610: Recieved ack for 2
 
-1415947097800: 5610: in src bank
+1416043648727: 5610: BS Removing ACKS below 2 for {"reqId":"1.0.3","bank":"TFCU","type":"withdraw","amount":8,"accountNum":5,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":2}, from pendingList len: 0
 
-1415947097800: 5610: in transfer - have enough money - deducting
+1416043652734: 5610: Attempting transaction{"reqId":"1.0.5","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947097800: 5610: BS: Adding data to proccessedTrans: {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043652734: 5610: {"reqId":"1.0.5","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947097801: 5610: Sending to suc + adding to pending list: {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":3}
+1416043652734: 5610: in transfer - have enough money - deducting
 
-1415947099813: 5610: BS Data: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043652734: 5610: BS: Adding data to proccessedTrans: {"reqId":"1.0.5","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947099813: 5610: Sending to suc + adding to pending list: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":4}
+1416043652734: 5610: Sending to suc + adding to pending list: {"reqId":"1.0.5","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":3}
 
-1415947099816: 5610: Removing ACKS below 4
+1416043652742: 5610: Recieved ack for 3
 
-1415947099816: 5610: BS Removing {"reqId":"0.0.4","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":3}, from pendingList len: 1
+1416043652742: 5610: BS Removing ACKS below 3 for {"reqId":"1.0.5","bank":"TFCU","type":"transfer","amount":2,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"destBank":"CHASE","destAct":5,"sender":{"ip":"127.0.0.1","port":5610},"order":3}, from pendingList len: 0
 
-1415947099817: 5610: BS Removing {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":4}, from pendingList len: 0
+1416043654743: 5610: Attempting transaction{"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947101818: 5610: BS Data: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043654744: 5610: Sending to suc + adding to pending list: {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":4}
 
-1415947101818: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":5}
+1416043654748: 5610: Recieved ack for 4
 
-1415947101823: 5610: Removing ACKS below 5
+1416043654748: 5610: BS Removing ACKS below 4 for {"reqId":"5.5.5","bank":"TFCU","type":"deposit","amount":101,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":4}, from pendingList len: 0
 
-1415947101823: 5610: BS Removing {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":5}, from pendingList len: 0
+1416043656751: 5610: Attempting transaction{"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947103825: 5610: BS Data: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043656751: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":5}
 
-1415947103825: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":6}
+1416043656753: 5610: Recieved ack for 5
 
-1415947103831: 5610: Removing ACKS below 6
+1416043656753: 5610: BS Removing ACKS below 5 for {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":5}, from pendingList len: 0
 
-1415947103831: 5610: BS Removing {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":6}, from pendingList len: 0
+1416043658755: 5610: Attempting transaction{"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
 
-1415947107835: 5610: BS Data: {"reqId":"0.0.9","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"port":6000,"ip":"127.0.0.1"}}
+1416043658755: 5610: Sending to suc + adding to pending list: {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":6}
 
-1415947107835: 5610: BS: InsufficientFunds - only had 8, requested: 25
+1416043658757: 5610: Recieved ack for 6
 
-1415947107835: 5610: Sending to suc + adding to pending list: {"reqId":"0.0.9","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":7}
-
-1415947107840: 5610: Removing ACKS below 7
-
-1415947107840: 5610: BS Removing {"reqId":"0.0.9","bank":"TFCU","type":"withdraw","amount":25,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":7}, from pendingList len: 0
+1416043658757: 5610: BS Removing ACKS below 6 for {"reqId":"6.6.6","bank":"TFCU","type":"withdraw","amount":23,"accountNum":1,"client":{"port":6000,"ip":"127.0.0.1"},"sender":{"ip":"127.0.0.1","port":5610},"order":6}, from pendingList len: 0
 

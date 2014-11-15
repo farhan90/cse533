@@ -20,8 +20,8 @@
 					"port" 	: 5611,
 					"ip"	: "127.0.0.1",
 					"startTime"	: 0,
-					"numSent"	: -1,
-					"numRecv"	: -1
+					"numSent"	: 2,
+					"numRecv"	: 2
 				},
 				{
 					"port" 	: 5612,
@@ -39,8 +39,8 @@
 					"port" 	: 5620,
 					"ip"	: "127.0.0.1",
 					"startTime"	: 0,
-					"numSent"	: -1,
-					"numRecv"	: -1
+					"numSent"	: 1,
+					"numRecv"	: 1
 				},
 				{
 					"port" 	: 5621,
@@ -70,6 +70,12 @@
 					"amount"	: 100,
 					"bank"		: "TFCU",
 					"reqId"		: "5.5.5"
+				},
+				{
+					"type" 		: "deposit",
+					"accountNum": 5,
+					"amount"	: 1,
+					"bank"		: "CHASE"
 				},
 				{
 					"type" 		: "transfer",
@@ -126,10 +132,9 @@
 					"bank"		: "TFCU"
 				},
 				{
-					"type" 		: "withdraw",
-					"accountNum": 1,
-					"amount"	: 25,
-					"bank"		: "TFCU"
+					"type" 		: "getBalance",
+					"accountNum": 5,
+					"bank"		: "CHASE"
 				}
 			]	
 		}
